@@ -29,8 +29,8 @@ public class DataQuery {
     
     public void Insertar(){
         category c = new category();
-        c.setId_category(0);
-        c.setName_category("Consolas");
+        c.setId_category(1);
+        c.setName_category("Juegos");
         em.persist(c);
         em.getTransaction().commit();
     }

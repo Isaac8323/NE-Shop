@@ -24,15 +24,14 @@
                 <h:form>
                     <h:panelGrid columns="1" style="position: absolute; top: 60px; left: 30px;">                        
                         <p:inputText style="width:470px;height:25px;" placeholder="Nombre de usuario" value="#{login.username}"/>
-                        <p:password style="width:470px;height:25px;" placeholder="Contraseña" value="#{login.password}"/>                                         
-                    </h:panelGrid>
-                </h:form>
+                        <p:password style="width:470px;height:25px;" placeholder="Contraseña" value="#{login.password}"/>       
+                        <p:commandButton style="position: absolute; top: 150px; left: 360px;" value="Continuar" action="#{login.LoginControl()}"/>
+                    </h:panelGrid>                    
+                </h:form>                               
+                
                 <h:form style="position: absolute; top: 160px; left: 30px;">
                     <p:commandLink value="¿Has olvidado la contraseña?" action="#"/>
                 </h:form>
-                <h:form style="position: absolute; top: 150px; left: 388px;">
-                    <p:commandButton value="Continuar" action="#{login.LoginControl()}"/>
-                </h:form>  
                 <h:form style="position: absolute; top: 250px; left: 190px;">
                     <p:outputLabel value="¿No tienes cuenta?"/>
                 </h:form>
@@ -47,4 +46,3 @@
 
     </h:body>
 </html>
-
