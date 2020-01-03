@@ -13,7 +13,7 @@ import org.primefaces.context.RequestContext;
 public class LoginController implements Serializable {
     private String username;
     private String password;
-    private final DataQuery query = new DataQuery();
+    private DataQuery query = new DataQuery();
     
     public String LoginControl(){
         if(query.loginControl(username, password)){
@@ -23,6 +23,14 @@ public class LoginController implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error" ,"Username or Password invalid!!!"));
         return"";
+    }   
+    
+    public void prueba(){
+        query.Insertar();
+    }
+    
+    public String toGuest(){
+        return "guest.xhtml?faces-redirect=true";
     }
 
     public String getUsername() {

@@ -10,16 +10,19 @@
     <h:body>
         <p:growl id="growl" sticky="true" showDetail="true"/>
         <h:form>
-            <p:panelGrid columns="2" style="position: absolute; top: 250px; left: 500px;">
+            <p:panelGrid columns="2" style="position: absolute; top: 250px; left: 650px;">
                 <f:facet name="header">Iniciar Sesión</f:facet>
                 <h:outputText value=""/>
                 <p:inputText value="#{login.username}"/>
                 <h:outputText value=""/>
                 <p:password value="#{login.password}"/>
                 <f:facet name="footer">
-                    <p:commandButton value="Continuar" action="#{login.LoginControl()}"/>
-                </f:facet>
+                    <p:commandButton value="Continuar" action="#{login.LoginControl()}"/>                    
+                </f:facet>                    
             </p:panelGrid>
+            <p:commandLink action="#{login.prueba()}">
+                <h:outputText value="Ingresar como invitado"/>
+            </p:commandLink>
         </h:form>
     </h:body>
 </html>

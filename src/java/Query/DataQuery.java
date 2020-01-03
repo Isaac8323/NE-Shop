@@ -1,5 +1,5 @@
 package Query;
-
+import Entity.category;
 import Entity.user;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -25,6 +25,14 @@ public class DataQuery {
         }catch (Exception e){
             return false;
         }
+    }
+    
+    public void Insertar(){
+        category c = new category();
+        c.setId_category(0);
+        c.setName_category("Consolas");
+        em.persist(c);
+        em.getTransaction().commit();
     }
     
 }

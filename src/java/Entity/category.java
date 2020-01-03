@@ -6,21 +6,21 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "category")
+@Table(name="category")
 public class category {
     @Id
-    @Column(name="id_categoty")
+    @Column(name="id_category")
     private int id_category;
     @Column(name="name_category")
-    private String name_categoty;
+    private String name_category;
 
     public category(){
         
     }
     
-    public category(int id_category, String name_categoty) {
+    public category(int id_category, String name_category) {
         this.id_category = id_category;
-        this.name_categoty = name_categoty;
+        this.name_category = name_category;
     }
 
     public int getId_category() {
@@ -31,12 +31,12 @@ public class category {
         this.id_category = id_category;
     }
 
-    public String getName_categoty() {
-        return name_categoty;
+    public String getName_category() {
+        return name_category;
     }
 
-    public void setName_categoty(String name_categoty) {
-        this.name_categoty = name_categoty;
+    public void setName_category(String name_category) {
+        this.name_category = name_category;
     }
     
 }
