@@ -27,6 +27,21 @@ public class DataQuery {
         }
     }
     
+    public void RegisterUser(String name, String lastname, String username, String password, char sex, String phone, String born, char user_type, int credit_card){
+        user u = new user();
+        u.setName(name);
+        u.setLastname(lastname);
+        u.setUsername(username);
+        u.setPassword(password);
+        u.setSex(sex);
+        u.setPhone(phone);
+        u.setBorn(born);
+        u.setUser_type(user_type);
+        u.setCredit_card(credit_card);
+        em.persist(u);
+        em.getTransaction().commit();
+    }
+    
     public void Insertar(){
         category c = new category();
         c.setId_category(1);

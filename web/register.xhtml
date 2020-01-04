@@ -12,7 +12,6 @@
         <h:form style="width:1500px;height:80px;background-color: #F1F1F1;">
             <p:commandLink value="Cuenta de NE" action="#{register.toLogin()}" style="font-family:Book Antiqua;font-size:18px;display: block; width:100%; text-align:center;position: absolute;top: 35px;color:black;" />            
         </h:form>
-
         <p:layout style="width:800px;height:80px; position: absolute; top: 150px; left: 390px;">
             <p:layoutUnit  position="center">
                 <h:form>
@@ -20,41 +19,37 @@
                 </h:form>                    
             </p:layoutUnit>
         </p:layout>
-
         <p:layout style="width:800px;height:600px; position: absolute; top: 200px; left: 390px;">
             <p:layoutUnit  position="center">                
                 <h:form style="position: absolute; left:80px; top:30px;">
                     <h:panelGrid columns="2">
                         <p:outputLabel style="display: block;text-align:right;" value="Nombre de usuario"/>
-                        <p:inputText style="width:400px;"/>
+                        <p:inputText style="width:400px;" value="#{register.username}"/>
                         <p:outputLabel style="display: block;text-align:right;" value="Contraseña"/>
-                        <p:password style="width:300px;" feedback="true"/>                        
+                        <p:password style="width:300px;" feedback="true" value="#{register.password}"/>                        
                         <p:outputLabel style="display: block;text-align:right;" value="Nombres"/>
-                        <p:inputText style="width:450px;"/>
+                        <p:inputText style="width:450px;" value="#{register.name}"/>
                         <p:outputLabel style="display: block;text-align:right;" value="Apellidos"/>
-                        <p:inputText style="width:450px;"/>
+                        <p:inputText style="width:450px;" value="#{register.lastname}"/>
                         <p:outputLabel style="display: block;text-align:right;" value="Sexo"/>                        
                         <h:selectOneRadio id="customRadio" valueChangeListener="#{register.changeRadio}" layout="custom">
                             <f:selectItems value="#{register.lista}" var="item" itemValue="#{item}" itemLabel="#{item}"/>
                             <f:ajax render="texto"/>
                         </h:selectOneRadio>
                         <p:outputLabel style="display: block;text-align:right;" value="Telefono"/>
-                        <p:inputText id="pwd"/>            
+                        <p:inputText id="pwd" value="#{register.phone}"/>            
                         <p:outputLabel style="display: block;text-align:right;" value="Fecha de nacimiento"/>
-                        <p:calendar value="#{dateController.date}" locale="tr" navigator="true" showButtonPanel="true"/>
+                        <p:calendar value="#{register.born}" locale="tr" navigator="true" showButtonPanel="true"/>
                         <p:outputLabel style="display: block;text-align:right;" value="No. de tarjeta"/>
-                        <p:inputText style="width:100px;"/>
+                        <p:inputText style="width:100px;" value="#{register.credit_card}"/>
                         <p:tooltip for="pwd" value="Solo ingrese números"/>                                                
                     </h:panelGrid>
                     <p:commandButton style="position: absolute; top: 310px; left: 260px;" value="Crear cuenta" action="#"/>
                 </h:form>
-
             </p:layoutUnit>
         </p:layout>
-
         <h:form style="width:1500px;height:80px;background-color: #989898;position: relative; top: 800px;">
             <p:commandLink value=">Sitio web de NE" style="font-size:16px;display: block; width:100%; text-align:right;position: absolute; right: 250px; top: 15px;color:white;" />            
         </h:form>                    
-
     </h:body>
 </html>
