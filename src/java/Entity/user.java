@@ -27,7 +27,7 @@ public class user {
     @Column(name = "sex")
     private char sex;
     @Column(name = "phone")
-    private char[] phone = new char[12];
+    private String phone;
     @Column(name = "born")
     private String born;
     @Column(name = "user_type")
@@ -39,12 +39,13 @@ public class user {
 
     }
 
-    public user(String username, String password, String name, String lastname, char sex, String born, char user_type, int credit_card) {
+    public user(String username, String password, String name, String lastname, char sex, String phone, String born, char user_type, int credit_card) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.lastname = lastname;
         this.sex = sex;
+        this.phone = phone;
         this.born = born;
         this.user_type = user_type;
         this.credit_card = credit_card;
@@ -90,11 +91,11 @@ public class user {
         this.sex = sex;
     }
 
-    public char[] getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(char[] phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

@@ -21,7 +21,7 @@ public class LoginController implements Serializable {
         }
         RequestContext.getCurrentInstance().update("growl");
         FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error" ,"Username or Password invalid!!!"));
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error" ,"Usuario o contraseña invalido"));
         return"";
     }   
     
@@ -31,6 +31,10 @@ public class LoginController implements Serializable {
     
     public String toGuest(){
         return "guest.xhtml?faces-redirect=true";
+    }
+    
+    public String toRegister(){
+        return "register.xhtml?faces-redirect=true";
     }
 
     public String getUsername() {

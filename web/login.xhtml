@@ -10,7 +10,7 @@
     <h:body style="background-color: #DDDDDD">                 
         <p:growl id="growl" sticky="true" showDetail="true"/>        
         <h:form style="width:1500px;height:80px;background-color: #F1F1F1;">
-            <h:outputText value="Cuenta de mi NE" style="font-family:Book Antiqua;font-size:18px;display: block; width:100%; text-align:center;position: absolute;top: 35px;color:black;" />            
+            <p:commandLink value="Cuenta de mi NE" style="font-family:Book Antiqua;font-size:18px;display: block; width:100%; text-align:center;position: absolute;top: 35px;color:black;" />            
         </h:form>
         <p:layout style="width:550px;height:80px; position: absolute; top: 150px; left: 500px;">
             <p:layoutUnit  position="center">
@@ -36,7 +36,7 @@
                     <p:outputLabel value="¿No tienes cuenta?"/>
                 </h:form>
                 <h:form style="position: absolute; top: 280px; left: 190px;">
-                    <p:commandButton value="Crear cuenta NE" action="#"/>
+                    <p:commandButton value="Crear cuenta NE" action="#{login.toRegister()}"/>
                 </h:form>
             </p:layoutUnit>
         </p:layout>
