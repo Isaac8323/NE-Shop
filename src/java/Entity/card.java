@@ -1,5 +1,6 @@
 package Entity;
 
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,7 +15,7 @@ public class card {
     @Column(name="balance")
     private double balance;
     @Column(name="expiration")
-    private String expiration;
+    private Date expiration;
     @Column(name="cvc")
     private int cvc;
     @Column(name="titular")
@@ -24,7 +25,7 @@ public class card {
         
     }
     
-    public card(int card_number, double balance, String expiration, int cvc, String titular) {
+    public card(int card_number, double balance, Date expiration, int cvc, String titular) {
         this.card_number = card_number;
         this.balance = balance;
         this.expiration = expiration;
@@ -48,11 +49,11 @@ public class card {
         this.balance = balance;
     }
 
-    public String getExpiration() {
+    public Date getExpiration() {
         return expiration;
     }
 
-    public void setExpiration(String expiration) {
+    public void setExpiration(Date expiration) {
         this.expiration = expiration;
     }
 

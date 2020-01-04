@@ -38,18 +38,52 @@
                         </h:selectOneRadio>
                         <p:outputLabel style="display: block;text-align:right;" value="Telefono"/>
                         <p:inputText id="pwd" value="#{register.phone}"/>            
-                        <p:outputLabel style="display: block;text-align:right;" value="Fecha de nacimiento"/>
-                        <p:calendar value="#{register.born}" locale="tr" navigator="true" showButtonPanel="true"/>
+                        <p:outputLabel style="display: block;text-align:right;" value="Fecha de nacimiento"/>                        
+
+                        <h:form id="form">
+                            <p:calendar  value="#{register.born}" locale="es" pattern="dd/MM/yyyy" navigator="true" showButtonPanel="true">
+                                <p:ajax event="dateSelect" listener="#{register.actualizar_fecha}"/> 
+                            </p:calendar>
+                        </h:form>
+
                         <p:outputLabel style="display: block;text-align:right;" value="No. de tarjeta"/>
                         <p:inputText style="width:100px;" value="#{register.credit_card}"/>
-                        <p:tooltip for="pwd" value="Solo ingrese números"/>                                                
+                        <p:tooltip for="pwd" value="Solo ingrese números"/>  
+                        <script type="text/javascript">
+                            PrimeFaces.locales['es'] = {
+                                closeText: 'Cerrar',
+                                prevText: 'Anterior',
+                                nextText: 'Siguiente',
+                                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                                dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+                                weekHeader: 'Semana',
+                                firstDay: 1,
+                                isRTL: false,
+                                showMonthAfterYear: false,
+                                yearSuffix: '',
+                                timeOnlyTitle: 'Sólo hora',
+                                timeText: 'Tiempo',
+                                hourText: 'Hora',
+                                minuteText: 'Minuto',
+                                secondText: 'Segundo',
+                                currentText: 'Fecha actual',
+                                ampm: false,
+                                month: 'Mes',
+                                week: 'Semana',
+                                day: 'Día',
+                                allDayText: 'Todo el día'
+                            };
+                        </script>
                     </h:panelGrid>
-                    <p:commandButton style="position: absolute; top: 310px; left: 260px;" value="Crear cuenta" action="#"/>
+                    <p:commandButton style="position: absolute; top: 310px; left: 260px;" value="Crear cuenta" action="#{register.RegisterController()}"/>
                 </h:form>
             </p:layoutUnit>
         </p:layout>
         <h:form style="width:1500px;height:80px;background-color: #989898;position: relative; top: 800px;">
-            <p:commandLink value=">Sitio web de NE" style="font-size:16px;display: block; width:100%; text-align:right;position: absolute; right: 250px; top: 15px;color:white;" />            
+            <p:commandLink value=">Sitio web de NE" style="font-size:16px;display: block; width:100%; text-align:right;position: absolute; right: 250px; top: 15px;color:white;" />
         </h:form>                    
     </h:body>
 </html>

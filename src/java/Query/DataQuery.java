@@ -1,6 +1,8 @@
 package Query;
+import Entity.card;
 import Entity.category;
 import Entity.user;
+import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -27,8 +29,9 @@ public class DataQuery {
         }
     }
     
-    public void RegisterUser(String name, String lastname, String username, String password, char sex, String phone, String born, char user_type, int credit_card){
+    public void RegisterUser(String name, String lastname, String username, String password, char sex, String phone, Date born, char user_type, int credit_card){
         user u = new user();
+        card c = new card();
         u.setName(name);
         u.setLastname(lastname);
         u.setUsername(username);
@@ -38,6 +41,9 @@ public class DataQuery {
         u.setBorn(born);
         u.setUser_type(user_type);
         u.setCredit_card(credit_card);
+        c.setCard_number(credit_card);
+        //c.setTitular();
+        c.setBalance(800);
         em.persist(u);
         em.getTransaction().commit();
     }
