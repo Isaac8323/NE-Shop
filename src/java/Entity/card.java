@@ -1,21 +1,24 @@
 package Entity;
 
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "card")
+@NamedQueries({
+    @NamedQuery(name="card.findAll", query = "SELECT c FROM card c"),
+    @NamedQuery(name = "card.Control", query = "SELECT c FROM card c WHERE c.cvc = :cvc")
+})
 public class card {
     @Id
     @Column(name="card_number")
     private int card_number;
     @Column(name="balance")
     private double balance;
-    @Column(name="expiration")
-    private Date expiration;
     @Column(name="cvc")
     private int cvc;
     @Column(name="titular")
@@ -25,10 +28,9 @@ public class card {
         
     }
     
-    public card(int card_number, double balance, Date expiration, int cvc, String titular) {
+    public card(int card_number, double balance, int cvc, String titular) {
         this.card_number = card_number;
         this.balance = balance;
-        this.expiration = expiration;
         this.cvc = cvc;
         this.titular = titular;
     }
@@ -48,15 +50,6 @@ public class card {
     public void setBalance(double balance) {
         this.balance = balance;
     }
-
-    public Date getExpiration() {
-        return expiration;
-    }
-
-    public void setExpiration(Date expiration) {
-        this.expiration = expiration;
-    }
-
     public int getCvc() {
         return cvc;
     }

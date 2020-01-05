@@ -1,13 +1,14 @@
 package Query;
+
 import Entity.card;
 import Entity.category;
 import Entity.user;
-import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class DataQuery {
+
     EntityManagerFactory emf;
     EntityManager em;
 
@@ -16,20 +17,32 @@ public class DataQuery {
         em = emf.createEntityManager();
         em.getTransaction().begin();
     }
-    
-    public boolean loginControl(String username, String password){
-        try{
+
+    public boolean loginControl(String username, String password) {
+        try {
             user u = em.createNamedQuery("user.Control", user.class).setParameter("username", username).setParameter("password", password).getSingleResult();
-            if(u != null){
+            if (u != null) {
                 return true;
             }
             return false;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
-    
-    public void RegisterUser(String name, String lastname, String username, String password, char sex, String phone, Date born, char user_type, int credit_card){
+
+    public boolean searchCVC(int cvc) {
+        try {
+            card ca = em.createNamedQuery("card.Control", card.class).setParameter("cvc", cvc).getSingleResult();
+            if (ca != null) {
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void RegisterUser(String name, String lastname, String username, String password, char sex, String phone, String born, int credit_card, int cvc) {
         user u = new user();
         card c = new card();
         u.setName(name);
@@ -39,21 +52,23 @@ public class DataQuery {
         u.setSex(sex);
         u.setPhone(phone);
         u.setBorn(born);
-        u.setUser_type(user_type);
+        u.setUser_type('U');
         u.setCredit_card(credit_card);
         c.setCard_number(credit_card);
-        //c.setTitular();
-        c.setBalance(800);
+        c.setTitular(name + " " + lastname);
+        c.setBalance(15000);
+        c.setCvc(cvc);
         em.persist(u);
+        em.persist(c);
         em.getTransaction().commit();
     }
-    
-    public void Insertar(){
+
+    public void Insertar() {
         category c = new category();
         c.setId_category(1);
         c.setName_category("Juegos");
         em.persist(c);
         em.getTransaction().commit();
     }
-    
+
 }

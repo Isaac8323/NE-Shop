@@ -1,6 +1,5 @@
 package Entity;
 
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -30,7 +29,7 @@ public class user {
     @Column(name = "phone")
     private String phone;
     @Column(name = "born")
-    private Date born;
+    private String born;
     @Column(name = "user_type")
     private char user_type;
     @Column(name = "credit_card")
@@ -40,7 +39,7 @@ public class user {
 
     }
 
-    public user(String username, String password, String name, String lastname, char sex, String phone, Date born, char user_type, int credit_card) {
+    public user(String username, String password, String name, String lastname, char sex, String phone, String born, char user_type, int credit_card) {
         this.username = username;
         this.password = password;
         this.name = name;
@@ -100,11 +99,11 @@ public class user {
         this.phone = phone;
     }
 
-    public Date getBorn() {
+    public String getBorn() {
         return born;
     }
 
-    public void setBorn(Date born) {
+    public void setBorn(String born) {
         this.born = born;
     }
 

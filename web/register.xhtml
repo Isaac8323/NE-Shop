@@ -37,7 +37,7 @@
                             <f:ajax render="texto"/>
                         </h:selectOneRadio>
                         <p:outputLabel style="display: block;text-align:right;" value="Telefono"/>
-                        <p:inputText id="pwd" value="#{register.phone}"/>            
+                        <p:inputText id="pwd" value="#{register.phone}"/>    
                         <p:outputLabel style="display: block;text-align:right;" value="Fecha de nacimiento"/>                        
 
                         <h:form id="form">
@@ -48,7 +48,11 @@
 
                         <p:outputLabel style="display: block;text-align:right;" value="No. de tarjeta"/>
                         <p:inputText style="width:100px;" value="#{register.credit_card}"/>
-                        <p:tooltip for="pwd" value="Solo ingrese números"/>  
+                        <p:outputLabel style="display: block;text-align:right;" value="CVC"/>
+                        <p:inputText id="cvc" value="#{register.cvc}"/>
+                        
+                        <p:tooltip for="pwd" value="Solo ingrese números (12)"/>
+                        <p:tooltip for="cvc" value="Solo ingrese números (4)"/>
                         <script type="text/javascript">
                             PrimeFaces.locales['es'] = {
                                 closeText: 'Cerrar',
@@ -78,7 +82,7 @@
                             };
                         </script>
                     </h:panelGrid>
-                    <p:commandButton style="position: absolute; top: 310px; left: 260px;" value="Crear cuenta" action="#{register.RegisterController()}"/>
+                    <p:commandButton style="position: absolute; top: 330px; left: 260px;" value="Crear cuenta" action="#{register.RegisterController()}"/>
                 </h:form>
             </p:layoutUnit>
         </p:layout>

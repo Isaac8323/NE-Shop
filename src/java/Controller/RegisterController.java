@@ -1,5 +1,6 @@
 package Controller;
 
+import Query.DataQuery;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import org.primefaces.event.SelectEvent;
 
 @ManagedBean(name = "register")
 @SessionScoped
-public class RegisterController implements Serializable {
+public class RegisterController implements Serializable {    
 
     private String username;
     private String password;
@@ -24,11 +25,12 @@ public class RegisterController implements Serializable {
     private char sex;
     private String phone;
     private Date born;
-    private char user_type;
     private int credit_card;
+    private int cvc;
     private List<String> lista = new ArrayList<String>();
     private String radio = "Selecciones una opción";
     private String f_seleccionada;
+    private DataQuery query = new DataQuery();
 
     {
         lista.add(0, "M");
@@ -47,30 +49,95 @@ public class RegisterController implements Serializable {
         return "user.xhtml?faces-redirect=true";
     }
 
-    public String RegisterController() {
+    public void RegisterController() {
         RequestContext.getCurrentInstance().update("growl");
         FacesContext context = FacesContext.getCurrentInstance();
         char c = radio.charAt(0);
         sex = c;
-        if(username.length()<29 && password.length()<29 && name.length()<49 && lastname.length()<49 && sex!='S' && phone.length()==12){
-            
+        boolean numero = false;
+        if (query.searchCVC(cvc)) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "Esta tarjeta ya existe"));
+        } else {
+            if (phone.contains("1") || phone.contains("2") || phone.contains("3") || phone.contains("4") || phone.contains("5") || phone.contains("6") || phone.contains("7") || phone.contains("8") || phone.contains("9") || phone.contains("0")) {
+                numero = true;
+            }
+            if (username.length() <= 29 && password.length() <= 29 && name.length() <= 49 && lastname.length() <= 49 && sex != 'S' && phone.length() == 12 && cvc > 99 && credit_card > 0 && numero == true) {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "username", username));
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "password", password));
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "name", name));
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "lastname", lastname));
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "sex", String.valueOf(sex)));
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "phone", phone));
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "born", f_seleccionada));
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "card", String.valueOf(credit_card)));
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "cvc", String.valueOf(cvc)));
+                query.RegisterUser(name, lastname, username, password, sex, phone, f_seleccionada, credit_card, cvc);
+            }
+            if (username.equals("")) {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Advertencia", "Favor de llenar el campo Nombre de Usuario"));
+            }
+            if (password.equals("")) {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Advertencia", "Favor de llenar el campo Contraseña"));
+            }
+            if (name.equals("")) {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Advertencia", "Favor de llenar el campo Nombres"));
+            }
+            if (lastname.equals("")) {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Advertencia", "Favor de llenar el campo Apellidos"));
+            }
+            if (phone.equals("")) {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Advertencia", "Favor de llenar el campo Telefono"));
+            }
+            if (cvc == 0) {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Advertencia", "Favor de llenar el campo CVC"));
+            }
+            if (credit_card == 0) {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Advertencia", "Favor de llenar el campo No. de tarjeta"));
+            }
+            if (username.length() > 29) {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Advertencia", "El nombre de usuario no debe exceder los 30 caracteres"));
+            }
+            if (password.length() > 29) {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Advertencia", "La contraseña no debe exceder los 30 caracteres"));
+            }
+            if (name.length() > 49) {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Advertencia", "Los nombres no debe exceder los 50 caracteres"));
+            }
+            if (username.length() > 49) {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Advertencia", "Los apellidos no debe exceder los 50 caracteres"));
+            }
+            if (sex == 'S') {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Advertencia", "Seleccione un sexo"));
+            }
+            if (phone.length() != 12) {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Advertencia", "El formato del número de teléfono debe ser de 12 dígitos"));
+            }
+            if (numero == false) {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Número telefónico", "Favor de ingresar solo números"));
+            }
         }
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"username" ,username));
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"password" ,password));
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"name" ,name));
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"lastname" ,lastname));
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"sex" ,String.valueOf(sex)));
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"phone" ,phone));
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"born" ,f_seleccionada));
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"card" ,String.valueOf(credit_card)));
-        
-        return "";
     }
 
     public void actualizar_fecha(SelectEvent event) {
         SimpleDateFormat fecha1 = new SimpleDateFormat("yyyy-MM-dd");
         StringBuilder cadena_fecha1_11 = new StringBuilder(fecha1.format(event.getObject()));
-        f_seleccionada = cadena_fecha1_11.toString();        
+        f_seleccionada = cadena_fecha1_11.toString();
+    }
+
+    public Date getBorn() {
+        return born;
+    }
+
+    public void setBorn(Date born) {
+        this.born = born;
+    }
+
+    public int getCvc() {
+        return cvc;
+    }
+
+    public void setCvc(int cvc) {
+        this.cvc = cvc;
     }
 
     public String getF_seleccionada() {
@@ -80,7 +147,7 @@ public class RegisterController implements Serializable {
     public void setF_seleccionada(String f_seleccionada) {
         this.f_seleccionada = f_seleccionada;
     }
-    
+
     public String getUsername() {
         return username;
     }
@@ -129,22 +196,6 @@ public class RegisterController implements Serializable {
         this.phone = phone;
     }
 
-    public Date getBorn() {
-        return born;
-    }
-
-    public void setBorn(Date born) {
-        this.born = born;
-    }
-
-    public char getUser_type() {
-        return user_type;
-    }
-
-    public void setUser_type(char user_type) {
-        this.user_type = user_type;
-    }
-
     public int getCredit_card() {
         return credit_card;
     }
@@ -169,5 +220,4 @@ public class RegisterController implements Serializable {
         this.radio = radio;
     }
 
- 
 }
