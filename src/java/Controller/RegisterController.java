@@ -61,17 +61,11 @@ public class RegisterController implements Serializable {
             if (phone.contains("1") || phone.contains("2") || phone.contains("3") || phone.contains("4") || phone.contains("5") || phone.contains("6") || phone.contains("7") || phone.contains("8") || phone.contains("9") || phone.contains("0")) {
                 numero = true;
             }
-            if (username.length() <= 29 && password.length() <= 29 && name.length() <= 49 && lastname.length() <= 49 && sex != 'S' && phone.length() == 12 && cvc > 99 && credit_card > 0 && numero == true) {
-                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "username", username));
-                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "password", password));
-                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "name", name));
-                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "lastname", lastname));
-                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "sex", String.valueOf(sex)));
-                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "phone", phone));
-                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "born", f_seleccionada));
-                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "card", String.valueOf(credit_card)));
-                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "cvc", String.valueOf(cvc)));
+            if (username.length() <= 29 && password.length() <= 29 && name.length() <= 49 && lastname.length() <= 49 && sex != 'S' && phone.length() == 12 && cvc > 99 && credit_card > 0 && numero == true) {                
                 query.RegisterUser(name, lastname, username, password, sex, phone, f_seleccionada, credit_card, cvc);
+                if(query.loginControl(username, password)){
+                    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Advertencia", "Se registró con éxito"));
+                }
             }
             if (username.equals("")) {
                 context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Advertencia", "Favor de llenar el campo Nombre de Usuario"));
