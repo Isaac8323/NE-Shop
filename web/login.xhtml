@@ -9,12 +9,12 @@
     </h:head>
     
     <script>
-        ola();
+        redirect();
     </script>
     
-    <h:body style="background-color: #DDDDDD" onload="ola()">
+    <h:body style="background-color: #DDDDDD" onload="redirect()">
         <h:form>
-            <p:remoteCommand name="ola" action="#{login.Logged()}"/>
+            <p:remoteCommand name="redirect" action="#{login.Logged()}"/>
         </h:form>
         <p:growl id="growl" sticky="true" showDetail="true"/> 
         <h:form style="width:1500px;height:80px;background-color: #F1F1F1;">

@@ -41,7 +41,7 @@ public class LoginController implements Serializable {
             page = "user.xhtml?faces-redirect=true";
         }
         return page;
-    }
+    }    
 
     public String logOut() {
         HttpSession hs = SessionControl.getSession();
