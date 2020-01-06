@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-01-2020 a las 07:34:31
+-- Tiempo de generación: 06-01-2020 a las 21:21:42
 -- Versión del servidor: 10.1.36-MariaDB
 -- Versión de PHP: 7.2.10
 
@@ -31,7 +31,6 @@ SET time_zone = "+00:00";
 CREATE TABLE `card` (
   `card_number` bigint(20) NOT NULL,
   `balance` double NOT NULL,
-  `expiration` date NOT NULL,
   `cvc` tinyint(4) NOT NULL,
   `titular` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -40,9 +39,11 @@ CREATE TABLE `card` (
 -- Volcado de datos para la tabla `card`
 --
 
-INSERT INTO `card` (`card_number`, `balance`, `expiration`, `cvc`, `titular`) VALUES
-(0, 999999999, '2020-06-30', 100, 'Oscar Isaac Ruiz Rodríguez'),
-(4444, 654684, '2020-06-11', 58, 'José');
+INSERT INTO `card` (`card_number`, `balance`, `cvc`, `titular`) VALUES
+(0, 999999999, 100, 'Oscar Isaac Ruiz Rodríguez'),
+(589, 15000, 125, 'asd asd'),
+(857, 15000, 102, 'Rafael Leon Estrada'),
+(4444, 654684, 58, 'José');
 
 -- --------------------------------------------------------
 
@@ -52,8 +53,18 @@ INSERT INTO `card` (`card_number`, `balance`, `expiration`, `cvc`, `titular`) VA
 
 CREATE TABLE `category` (
   `id_category` int(11) NOT NULL,
-  `name_categroy` varchar(30) NOT NULL
+  `name_category` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `category`
+--
+
+INSERT INTO `category` (`id_category`, `name_category`) VALUES
+(0, 'Consolas'),
+(1, 'Juegos'),
+(2, 'Accesorios'),
+(3, 'Juguetes');
 
 -- --------------------------------------------------------
 
@@ -99,7 +110,7 @@ CREATE TABLE `user` (
   `name` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
   `sex` char(1) NOT NULL,
-  `phone` char(12) NOT NULL,
+  `phone` varchar(12) NOT NULL,
   `born` date NOT NULL,
   `user_type` char(1) NOT NULL,
   `credit_card` bigint(20) NOT NULL
@@ -110,7 +121,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `password`, `name`, `lastname`, `sex`, `phone`, `born`, `user_type`, `credit_card`) VALUES
-('Sassy', 'Sassy', 'Oscar Isaac', 'Ruiz Rodríguez', 'M', '3336587554', '2000-02-26', 'U', 0);
+('asd', 'asd', 'asd', 'asd', 'M', '589658745213', '2020-01-22', 'U', 589),
+('Sassy', 'asd', 'Oscar Isaac', 'Ruiz Rodríguez', 'M', '3336587554', '2000-02-26', 'A', 0),
+('SkillerHero', 'SkillerHero', 'Rafael', 'Leon Estrada', 'M', '589623587415', '2020-01-30', 'U', 857);
 
 --
 -- Índices para tablas volcadas
