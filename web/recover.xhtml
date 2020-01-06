@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Recuperar contraseña</title>
+    </h:head>
+    <script type="text/javascript">
+        function Navigate(cond) {
+            if (cond === true) {
+                alert('La contraseña ha sido cambiada');
+                window.location.href = "login.xhtml";
+            }else{
+                alert('La contraseña no ha sido cambiada');
+            }
+        }
+    </script>
+    <h:body>
+        <p:growl id="growls" sticky="true" showDetail="true"/> 
+        <h:form style="width:1500px;height:80px;background-color: #F1F1F1;">
+            <p:commandLink value="Cuenta de mi NE" style="font-family:Book Antiqua;font-size:18px;display: block; width:100%; text-align:center;position: absolute;top: 35px;color:black;" />            
+        </h:form>
+        <p:layout style="width:550px;height:80px; position: absolute; top: 150px; left: 500px;">
+            <p:layoutUnit  position="center">
+                <h:form>
+                    <h:outputText value="Crear una contraseña nueva" style="font-size:24px;display: block; width:100%; text-align:center;" />
+                    <h:outputText value="Introduce el nombre de usuario y el número de teléfono que usaste para crear la cuenta." style="font-size:12px;display: block; width:100%; text-align:center;" />
+                </h:form>                    
+            </p:layoutUnit>
+        </p:layout>
+        <p:layout style="width:550px;height:300px; position: absolute; top: 210px; left: 500px;">
+            <p:layoutUnit  position="center">
+                <h:form>
+                    <h:panelGrid columns="1" style="position: absolute; top: 60px; left: 30px;">
+                        <p:outputLabel value="Nombre de usuario"/>
+                        <p:inputText style="width:470px;height:25px;" placeholder="Usuario" value="#"/>
+                        <p:outputLabel value="Número telefónico"/>
+                        <p:inputText style="width:470px;height:25px;" placeholder="Número de teléfono" value="#"/>
+                        <p:commandButton style="position: absolute; top: 155px; left: 160px;" value="Verificar número" action="#" onclick="Navigate(#{recover.navigate})">
+                            <f:ajax execute="@form" render="@form"/>
+                        </p:commandButton>
+                    </h:panelGrid>           
+                </h:form>                
+            </p:layoutUnit>
+        </p:layout>
+
+        <p:layout style="width:550px;height:300px; position: absolute; top: 500px; left: 500px;">
+            <p:layoutUnit  position="center">
+                <h:form>
+                    <h:outputText value="Ahora introduce la nueva contraseña." style="font-size:20px;display: block; width:100%; text-align:center;" />
+                </h:form> 
+                <h:form>
+                    <h:panelGrid columns="1" style="position: absolute; top: 60px; left: 30px;">
+                        <p:outputLabel value="Contraseña"/>
+                        <p:inputText style="width:470px;height:25px;" placeholder="Contraseña" value=""/>
+                        <p:outputLabel value="Confirmar contraseña (Ingresela de nuevo)"/>
+                        <p:inputText style="width:470px;height:25px;" placeholder="Confirmar contraseña" value=""/>
+                        <p:commandButton style="position: absolute; top: 155px; left: 160px;" value="Cambiar contraseña" action="#"/>
+
+                    </h:panelGrid>           
+                </h:form>                
+            </p:layoutUnit>
+        </p:layout>
+        <h:form style="width:1500px;height:80px;background-color: #989898;position: relative; top: 800px;">
+            <p:commandLink value=">Sitio web de NE" style="font-size:16px;display: block; width:100%; text-align:right;position: absolute; right: 250px; top: 15px;color:white;" />            
+        </h:form> 
+    </h:body>
+</html>
+

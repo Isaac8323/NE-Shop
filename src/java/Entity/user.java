@@ -11,7 +11,8 @@ import javax.persistence.Table;
 @Table(name = "user")
 @NamedQueries({
     @NamedQuery(name="user.findAll", query = "SELECT u FROM user u"),
-    @NamedQuery(name = "user.Control", query = "SELECT u FROM user u WHERE u.username = :username and u.password = :password")
+    @NamedQuery(name = "user.Control", query = "SELECT u FROM user u WHERE u.username = :username and u.password = :password"),
+    @NamedQuery(name = "user.phone", query = "SELECT u FROM user u WHERE u.username = :username and u.phone = :phone")
 })
 public class user {
 

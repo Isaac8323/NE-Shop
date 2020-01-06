@@ -64,7 +64,7 @@ public class RegisterController implements Serializable {
             if (username.length() <= 29 && password.length() <= 29 && name.length() <= 49 && lastname.length() <= 49 && sex != 'S' && phone.length() == 12 && cvc > 99 && credit_card > 0 && numero == true) {                
                 query.RegisterUser(name, lastname, username, password, sex, phone, f_seleccionada, credit_card, cvc);
                 if(query.loginControl(username, password)){
-                    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Advertencia", "Se registró con éxito"));
+                    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro", "Se registró con éxito"));
                 }
             }
             if (username.equals("")) {

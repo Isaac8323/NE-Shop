@@ -38,7 +38,7 @@
                 </h:form>                               
                 
                 <h:form style="position: absolute; top: 160px; left: 30px;">
-                    <p:commandLink value="¿Has olvidado la contraseña?" action="#"/>
+                    <p:commandLink value="¿Has olvidado la contraseña?" action="#{login.toRecover()}"/>
                 </h:form>
                 <h:form style="position: absolute; top: 250px; left: 190px;">
                     <p:outputLabel value="¿No tienes cuenta?"/>
@@ -50,7 +50,6 @@
         </p:layout>
         <h:form style="width:1500px;height:80px;background-color: #989898;position: relative; top: 800px;">
             <p:commandLink value=">Sitio web de NE" style="font-size:16px;display: block; width:100%; text-align:right;position: absolute; right: 250px; top: 15px;color:white;" />            
-        </h:form>                    
-
+        </h:form>
     </h:body>
 </html>

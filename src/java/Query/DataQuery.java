@@ -1,7 +1,6 @@
 package Query;
 
 import Entity.card;
-import Entity.category;
 import Entity.user;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -28,6 +27,17 @@ public class DataQuery {
         } catch (Exception e) {
             return false;
         }
+    }
+    
+    public char getUserType(String user, String pass){
+        char nombre;
+        try{
+            user u = em.createNamedQuery("user.Control", user.class).setParameter("username", user).setParameter("password", pass).getSingleResult();
+            nombre = u.getUser_type();
+        }catch(Exception e){
+            nombre = 0;
+        }
+        return nombre;
     }
 
     public boolean searchCVC(int cvc) {
@@ -59,14 +69,6 @@ public class DataQuery {
         c.setBalance(15000);
         c.setCvc(cvc);
         em.persist(u);
-        em.persist(c);
-        em.getTransaction().commit();
-    }
-
-    public void Insertar() {
-        category c = new category();
-        c.setId_category(1);
-        c.setName_category("Juegos");
         em.persist(c);
         em.getTransaction().commit();
     }
