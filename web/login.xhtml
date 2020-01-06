@@ -10,7 +10,7 @@
     
     <script>
         redirect();
-    </script>
+    </script>    
     
     <h:body style="background-color: #DDDDDD" onload="redirect()">
         <h:form>
@@ -38,13 +38,16 @@
                 </h:form>                               
                 
                 <h:form style="position: absolute; top: 160px; left: 30px;">
-                    <p:commandLink value="¿Has olvidado la contraseña?" action="#{login.toRecover()}"/>
+                    <p:commandLink value="¿Has olvidado la contraseña?" action="#{recover.eraseField()}"/>
                 </h:form>
                 <h:form style="position: absolute; top: 250px; left: 190px;">
                     <p:outputLabel value="¿No tienes cuenta?"/>
                 </h:form>
-                <h:form style="position: absolute; top: 280px; left: 190px;">
+                <h:form style="position: absolute; top: 280px; left: 180px;">
                     <p:commandButton value="Crear cuenta NE" action="#{login.toRegister()}"/>
+                </h:form>
+                <h:form style="position: absolute; top: 350px; left: 180px;">
+                    <p:commandLink value=">Ingresar como invitado"/>
                 </h:form>
             </p:layoutUnit>
         </p:layout>

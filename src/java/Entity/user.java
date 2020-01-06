@@ -15,7 +15,6 @@ import javax.persistence.Table;
     @NamedQuery(name = "user.phone", query = "SELECT u FROM user u WHERE u.username = :username and u.phone = :phone")
 })
 public class user {
-
     @Id
     @Column(name = "username")
     private String username;

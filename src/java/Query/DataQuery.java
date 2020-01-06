@@ -28,13 +28,45 @@ public class DataQuery {
             return false;
         }
     }
+
+    public boolean recoverControl(String username, String phone) {
+        try {
+            user u = em.createNamedQuery("user.phone", user.class).setParameter("username", username).setParameter("phone", phone).getSingleResult();
+            if (u != null) {
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
     
-    public char getUserType(String user, String pass){
+    public void passControl(String username, String password){
+        user u = em.find(user.class, username);
+        u.setUsername(username);
+        u.setPassword(password);
+        em.merge(u);
+        em.getTransaction().commit();
+    }
+    
+    public String getName(String username, String phone){
+        try {
+            user u = em.createNamedQuery("user.phone", user.class).setParameter("username", username).setParameter("phone", phone).getSingleResult();
+            if (u != null) {
+                return u.getName();
+            }
+            return "";
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    
+    public char getUserType(String user, String pass) {
         char nombre;
-        try{
+        try {
             user u = em.createNamedQuery("user.Control", user.class).setParameter("username", user).setParameter("password", pass).getSingleResult();
             nombre = u.getUser_type();
-        }catch(Exception e){
+        } catch (Exception e) {
             nombre = 0;
         }
         return nombre;
