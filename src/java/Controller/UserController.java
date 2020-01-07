@@ -6,8 +6,10 @@
 package Controller;
 
 import Util.SessionControl;
+import java.io.IOException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import org.primefaces.context.RequestContext;
 
@@ -15,15 +17,12 @@ import org.primefaces.context.RequestContext;
 @SessionScoped
 public class UserController {
     
-        public String Expired(){
-        String page;
+        public void Expired() throws IOException{
         HttpSession hs = SessionControl.getSession();
         RequestContext.getCurrentInstance().update("info");
         if(hs.getAttribute("username")==null){
-            page = "login.xhtml?faces-redirect=true";
-        }else{
-            page = "";
+            hs.invalidate();
+            FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml"); 
         }
-        return page;
     }
 }

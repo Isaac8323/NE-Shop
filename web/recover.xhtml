@@ -7,31 +7,27 @@
     <h:head>
         <title>Recuperar contraseña</title>
     </h:head>
-    <script type="text/javascript">
-        function Navigate(cond) {            
-            if (cond === false) {
-                alert('Buscando... Si no ocurre nada, no se encontró el usuario con el número ingresado');
-            }
-            if (cond === true) {
-                alert('Ingrese su nueva contraseña');
-            }
+    <script>
+        function Refresh() {
             location.reload();
         }
     </script>
-    <script type="text/javascript">
-        function Succesfull(attrib){
-            if(attrib===true){
-                alert('Su contraseña se ha cambiado con éxito!!');
-                window.location.replace("login.xhtml");
-            }
-        }
-    </script>
-    <script type="text/javascript">
-        function Refresh(){
-            location.reload();
-        }
-    </script>
-    <h:body onload="Succesfull(#{recover.succesfully})">
+    <h:body style="background-color: #DDDDDD">
+
+        <p:dialog id="dialog" widgetVar="wdialog" header="Password" draggable="false" closable="false" resizable="false" modal="true" appendTo="@(body)">
+            <h:form>
+                <p:outputLabel value="La contraseña ha sido cambiada exitosamente     "/>
+                <p:commandButton value="Aceptar" icon="ui-icon-check" action="#{recover.toLogin()}"/>            
+            </h:form>            
+        </p:dialog>
+        
+        <p:dialog id="dialog1" widgetVar="wdialog1" header="Not Found" draggable="false" closable="false" resizable="false" modal="true" appendTo="@(body)">
+            <h:form>
+                <p:outputLabel value="No se encontrón nombre de usuario y teléfono coincidentes     "/>
+                <p:commandButton value="Aceptar" icon="ui-icon-check" onclick="PF('wdialog1').hide();"/>
+            </h:form>            
+        </p:dialog>
+
         <p:growl id="growls" sticky="true" showDetail="true"/> 
         <h:form style="width:1500px;height:80px;background-color: #F1F1F1;">
             <p:commandLink value="Cuenta de mi NE" style="font-family:Book Antiqua;font-size:18px;display: block; width:100%; text-align:center;position: absolute;top: 35px;color:black;" action="#{recover.toLogin()}" />            
@@ -52,7 +48,7 @@
                         <p:inputText style="width:470px;height:25px;" placeholder="Usuario" autocomplete="off" value="#{recover.username}"/>
                         <p:outputLabel value="Número telefónico"/>
                         <p:inputText style="width:470px;height:25px;" placeholder="Número de teléfono" autocomplete="off" value="#{recover.phone}"/>
-                        <p:commandButton style="position: absolute; top: 155px; left: 160px;" value="Verificar número" onclick="Navigate(#{recover.found})" action="#{recover.verifyNumber()}">
+                        <p:commandButton style="position: absolute; top: 155px; left: 160px;" value="Verificar número" action="#{recover.verifyNumber()}">
                             <f:ajax execute="@form" render="@form"/>
                         </p:commandButton>
                     </h:panelGrid>           
@@ -71,8 +67,7 @@
                         <p:password style="width:470px;height:25px;" placeholder="Contraseña" feedback="true" value="#{recover.password}"/>
                         <p:outputLabel value="Confirmar contraseña (Ingresela de nuevo)"/>
                         <p:password style="width:470px;height:25px;" placeholder="Confirmar contraseña" feedback="true" value="#{recover.passconfirm}"/>
-                        <p:commandButton style="position: absolute; top: 155px; left: 160px;" value="Cambiar contraseña" onclick="Refresh()" action="#{recover.changePass()}"/>
-
+                        <p:commandButton style="position: absolute; top: 155px; left: 160px;" value="Cambiar contraseña" action="#{recover.changePass()}"/>
                     </h:panelGrid>           
                 </h:form>                
             </p:layoutUnit>
