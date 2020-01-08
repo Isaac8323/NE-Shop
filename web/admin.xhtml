@@ -19,11 +19,11 @@
 
         <h:form>
             <p:layout fullPage="true">
-                <p:layoutUnit position="north" size="90">
+                <p:layoutUnit position="north" size="60">
                     <h:form style="width:1500px;height:80px;background-color: #F1F1F1;">
                         Bienvenido Admin #{login.username} !
-                        <h:outputText value="NE Website" style="font-family:Book Antiqua;font-size:18px;display: block; width:100%; text-align:center;position: absolute;top: 35px;color:black;" />
-                        <p:commandButton style="display: block; position:absolute; left:1325px;" value="Cerrar sesión" action="#{login.logOut()}">
+                        <h:outputText value="NE Website" style="font-family:Book Antiqua;font-size:18px;display: block; width:100%; text-align:center;position: absolute;top: 10px;color:black;" />
+                        <p:commandButton style="display: block; position:absolute; left:1325px; top: 5px;" value="Cerrar sesión" action="#{login.logOut()}">
                             <p:confirm header="Confirmación" message="¿Estás seguro de que deseas cerrar sesión?" icon="ui-icon-alert"/>
                         </p:commandButton>
                         <p:confirmDialog global="true" showEffect="fade">
@@ -32,30 +32,41 @@
                         </p:confirmDialog>
                     </h:form>
                 </p:layoutUnit>
-                <p:layoutUnit position="south" size="100">
-                    <h:outputText value="Bottom content." />
+                <p:layoutUnit position="south" size="0">
+
                 </p:layoutUnit>
-                <p:layoutUnit position="west" size="300">
-                    <h:outputText value="Left content" />
+                <p:layoutUnit position="west" size="210">
+                    <p:menu style="width: 180px;">
+                        <p:submenu label="Directivos">
+                            <p:menuitem value="Añadir administrador"/>
+                            <p:menuitem value="Actualizar datos"/>
+                        </p:submenu>
+                        <p:submenu label="Productos">
+                            <p:menuitem value="Añadir productos" outcome="product.xhtml"/>
+                            <p:menuitem value="Actualizar datos"/>
+                        </p:submenu>
+                    </p:menu>
                 </p:layoutUnit>
-                <p:layoutUnit position="east" size="200">
-                    <h:outputText value="Right Content" />
+                <p:layoutUnit position="east" size="0">
+
                 </p:layoutUnit>
                 <p:layoutUnit position="center">
                     <p:tabMenu activeIndex="0">
-                        <p:menuitem value="Overview" outcome="/product" icon="ui-icon-star"/>
-                        <p:menuitem value="Demos" outcome="/product" icon="ui-icon-search" />
-                        <p:menuitem value="Documentation" outcome="/product" icon="ui-icon-document"/>
-                        <p:menuitem value="Support" outcome="/product" icon="ui-icon-wrench"/>
-                        <p:menuitem value="Social" outcome="/product" icon="ui-icon-person" />
+                        <p:menuitem value="Productos" action="#{admin.reDirect('viewProducts.xhtml')}" icon="ui-icon-star" update="frame"/>
+                        <p:menuitem value="Usuarios" action="#{admin.reDirect('viewUsers.xhtml')}" icon="ui-icon-star" update="frame"/>
+                        <p:menuitem value="Compras"  icon="ui-icon-wrench"/>
                     </p:tabMenu>
-                    <h:form>
-                        <div id="wrap"> 
-                            <iframe id="imagepgframe" name="imagepgframe" frameborder="0" scrolling="auto" src="/product.xhtml">
-                                <p>Your browser does not support iframes.</p>
-                            </iframe>
-                        </div>
-                    </h:form>
+
+                    <p:panel id="frame">
+                        <h:form>
+                            <div id="wrap"> 
+                                <iframe id="imagepgframe" name="imagepgframe" width="1250" height="558" frameborder="0" scrolling="auto" src="#{admin.iframe}">
+                                    <p>Your browser does not support iframes.</p>
+                                </iframe>
+                            </div>
+                        </h:form>
+                    </p:panel>                        
+
                 </p:layoutUnit>
             </p:layout>
 

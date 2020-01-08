@@ -5,6 +5,7 @@ import Entity.product;
 import Entity.user;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -87,6 +88,7 @@ public class DataQuery {
             return false;
         }
     }
+
     
     public void RegisterProduct(String name_product, int stock, int category, double price, String description, String image){
         product p = new product();

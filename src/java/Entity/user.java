@@ -107,20 +107,20 @@ public class user {
         this.born = born;
     }
 
-    public char getUser_type() {
-        return user_type;
-    }
-
-    public void setUser_type(char user_type) {
-        this.user_type = user_type;
-    }
-
     public int getCredit_card() {
         return credit_card;
     }
 
     public void setCredit_card(int credit_card) {
         this.credit_card = credit_card;
+    }
+
+    public char getUser_type() {
+        return user_type;
+    }
+
+    public void setUser_type(char user_type) {
+        this.user_type = user_type;
     }
 
 

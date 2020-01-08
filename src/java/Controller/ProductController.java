@@ -57,7 +57,10 @@ public class ProductController {
                 context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Advertencia", "Favor de ingresar un precio"));
             }
         }
-
+    }
+    
+    public String toAdmin(){
+        return "admin.xhtml?faces-redirect=true";
     }
 
     public String getName() {

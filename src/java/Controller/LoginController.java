@@ -72,6 +72,7 @@ public class LoginController implements Serializable {
         this.user_type = user_type;
     }
 
+
     public String toRecover(){
         return "recover.xhtml?faces-redirect=true";
     }

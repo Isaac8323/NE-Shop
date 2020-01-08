@@ -58,6 +58,10 @@ public class RecoverController {
     public String toLogin() {
         return "login.xhtml?faces-redirect=true";
     }
+    
+    public String toAdmin(){
+        return "admin.xhtml?faces-redirect=true";
+    }
 
     public String getStatus() {
         return status;

@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <script>
+        Load();
+    </script>
+    <script>
+        function Refresh() {
+            location.reload();
+        }
+    </script>
+    <script>
+        expired();
+    </script>
+    <h:body onload="expired()">
+        <h:form>
+            <p:remoteCommand name="expired" action="#{user.Expired()}"/>
+        </h:form>
+        <p:growl id="infoo" sticky="true" showDetail="true"/>
+        <h:form>            
+            <p:commandButton value="Listar" action="#{admin.getUser()}" update="tabla"/>
+            <p:dataTable id="tabla" var="lis" value="#{admin.users}" stickyHeader="true" >
+                <f:facet name="header">Usuarios Registrados</f:facet>
+                <p:column headerText="Username">
+                    <p:outputLabel value="#{lis.username}"/>
+                </p:column>
+                <p:column headerText="UserType">
+                    <p:outputLabel value="#{lis.user_type}"/>
+                </p:column>
+                <p:column headerText="Nombre">
+                    <p:outputLabel value="#{lis.name}"/>
+                </p:column>
+                <p:column headerText="Apellidos">
+                    <p:outputLabel value="#{lis.lastname}"/>
+                </p:column>
+                <p:column headerText="Sexo">
+                    <p:outputLabel value="#{lis.sex}"/>
+                </p:column>
+                <p:column headerText="Teléfono">
+                    <p:outputLabel value="#{lis.phone}"/>
+                </p:column>
+                <p:column headerText="Fecha de nacimiento">
+                    <p:outputLabel value="#{lis.born}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>                
+    </h:body>
+</html>
+

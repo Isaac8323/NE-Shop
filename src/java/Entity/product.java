@@ -3,11 +3,16 @@ package Entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "product")
+@NamedQueries({
+    @NamedQuery(name="product.findAll", query = "SELECT p FROM product p"),
+    @NamedQuery(name = "product.Control", query = "SELECT p FROM product p WHERE p.name_product = :nameproduct")
+})
 public class product {
     @Id
     @Column(name="Id_product")
