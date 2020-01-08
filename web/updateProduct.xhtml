@@ -8,33 +8,40 @@
         <title>Producto</title>
     </h:head>
     <script>
+        function Refresh() {
+            location.reload();
+        }
+    </script>
+    <script>
         expired();
     </script>
     <h:body style="background-color: #DDDDDD" onload="expired()"> 
-        <h:form>
-            <p:remoteCommand name="expired" action="#{user.validateAdmin()}"/>
-        </h:form>
         <p:dialog id="dialogs" widgetVar="wdialogs" header="Product" draggable="false" closable="false" resizable="false" modal="true" appendTo="@(body)">
             <h:form>
-                <p:outputLabel value="El producto se registró correctamente     "/>
-                <p:commandButton value="Aceptar" icon="ui-icon-check" action="#{product.toAdmin()}"/>
+                <p:outputLabel value="El producto se actuallizó correctamente     "/>
+                <p:commandButton value="Aceptar" icon="ui-icon-check" action="#{product.toAdmin()}"/>                
             </h:form>
         </p:dialog>
         <p:growl id="growlpro" sticky="true" showDetail="true"/>
         <h:form style="width:1500px;height:80px;background-color: #F1F1F1;">
             <p:commandLink value="Administración" style="font-family:Book Antiqua;font-size:18px;display: block; width:100%; text-align:center;position: absolute;top: 35px;color:black;" action="#{product.toAdmin()}" />            
         </h:form>
-        <p:layout style="width:850px;height:80px; position: absolute; top: 150px; left: 335px;">
+        <p:layout style="width:872px;height:80px; position: absolute; top: 150px; left: 335px;">
             <p:layoutUnit  position="center">
                 <h:form>
-                    <h:outputText value="Registro de producto" style="font-size:24px;display: block; width:100%; text-align:center;" />
+                    <h:outputText value="Actualización de producto" style="font-size:24px;display: block; width:100%; text-align:center;" />
                 </h:form>                    
             </p:layoutUnit>
         </p:layout>
-        <p:layout style="width:850px;height:600px; position: absolute; top: 210px; left: 335px;">
+        <p:layout style="width:872px;height:800px; position: absolute; top: 210px; left: 335px;">
             <p:layoutUnit  position="center">                
-                <h:form style="position: absolute; left:25px; top:30px;" enctype="multipart/form-data" id="register">
-                    <h:panelGrid columns="2">
+                <h:form style="position: absolute; left:25px; top:30px;" enctype="multipart/form-data" id="register" >
+                    <p:remoteCommand partialSubmit="true" process="@this" name="expired" action="#{product.getList()}" update="listado"/>
+                    <p:panelGrid columns="2" id="param">                        
+                        <p:selectOneMenu value="#{product.aux}" id="listado" filter="true" filterMatchMode="contains">
+                            <f:selectItems value="#{product.products}" var="sel" itemLabel="#{sel.name_product}" itemValue="#{sel.id_product}"/>
+                        </p:selectOneMenu>
+                        <h:commandButton value="Buscar" action="#{product.ProductRender()}"/>
                         <p:outputLabel style="display: block;text-align:right;" value="Nombre del producto"/>
                         <p:inputText style="width:400px;" value="#{product.name}"/>                       
                         <p:outputLabel style="display: block;text-align:right;" value="Cantidad en stock"/>
@@ -56,12 +63,12 @@
                         <p:inputText style="width:400px;" value="#{product.price}"/>                       
                         <p:outputLabel style="display: block;text-align:right;" value="Descripcion"/>
                         <p:inputTextarea style="width:400px;" value="#{product.desc}"/>                                                                                               
-                    </h:panelGrid>
-                    <h:commandButton style="position: absolute; top: 500px; left: 300px;" value="Registrar producto" action="#{product.ProductControl()}"/>
+                    </p:panelGrid>
+                    <h:commandButton style="position: absolute; left: 310px;" value="Actualizar producto" action="#{product.ProductControl()}"/>
                 </h:form>
             </p:layoutUnit>
         </p:layout> 
-        <h:form style="width:1500px;height:80px;background-color: #989898;position: relative; top: 800px;">
+        <h:form style="width:1500px;height:80px;background-color: #989898;position: relative; top: 1000px;">
             <p:commandLink value=">Sitio web de NE" style="font-size:16px;display: block; width:100%; text-align:right;position: absolute; right: 250px; top: 15px;color:white;" />            
         </h:form> 
     </h:body>

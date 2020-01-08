@@ -12,7 +12,7 @@
     </script>
     <h:body style="background-color: #DDDDDD" onload="expired()">
         <h:form>
-            <p:remoteCommand name="expired" action="#{user.Expired()}"/>
+            <p:remoteCommand name="expired" action="#{user.validateUser()}"/>
         </h:form>
         <p:growl id="info" sticky="true" showDetail="true"/>
         <h:form style="width:1500px;height:80px;background-color: #F1F1F1;">

@@ -8,44 +8,33 @@
         <title>Facelet Title</title>
     </h:head>
     <script>
-        Load();
-    </script>
-    <script>
-        function Refresh() {
-            location.reload();
-        }
-    </script>
-    <script>
         expired();
     </script>
     <h:body onload="expired()">
-        <h:form>
-            <p:remoteCommand name="expired" action="#{user.Expired()}"/>
-        </h:form>
         <p:growl id="infoo" sticky="true" showDetail="true"/>
-        <h:form>            
-            <p:commandButton value="Listar" action="#{admin.getProduct()}" update="tabla"/>
+        <h:form>
+            <p:remoteCommand partialSubmit="true" process="@this" name="expired" action="#{admin.getProduct()}" update="tabla"/>
             <p:dataTable id="tabla" var="lis" value="#{admin.products}" stickyHeader="true" >
                 <f:facet name="header">Productos Registrados</f:facet>
-                <p:column headerText="Id de producto">
+                <p:column>
                     <p:outputLabel value="#{lis.id_product}"/>
                 </p:column>
-                <p:column headerText="Nombre del producto">
+                <p:column>
                     <p:outputLabel value="#{lis.name_product}"/>
                 </p:column>
-                <p:column headerText="Cantidad en stock">
+                <p:column>
                     <p:outputLabel value="#{lis.stock}"/>
                 </p:column>
-                <p:column headerText="Categoría">
+                <p:column>
                     <p:outputLabel value="#{lis.category}"/>
                 </p:column>
-                <p:column headerText="Precio">
+                <p:column>
                     <p:outputLabel value="#{lis.price}"/>
                 </p:column>
-                <p:column headerText="Descripción">
+                <p:column>
                     <p:outputLabel value="#{lis.description}"/>
                 </p:column>
-                <p:column headerText="Imágen">
+                <p:column>
                     <p:graphicImage style="display:block;margin-left:auto;margin-right:auto;" id="render" value = "#{lis.image}" width="150" height="120" cache="false"/>
                 </p:column>
             </p:dataTable>

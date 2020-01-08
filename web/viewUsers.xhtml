@@ -19,33 +19,30 @@
         expired();
     </script>
     <h:body onload="expired()">
-        <h:form>
-            <p:remoteCommand name="expired" action="#{user.Expired()}"/>
-        </h:form>
         <p:growl id="infoo" sticky="true" showDetail="true"/>
         <h:form>            
-            <p:commandButton value="Listar" action="#{admin.getUser()}" update="tabla"/>
+            <p:remoteCommand partialSubmit="true" process="@this" name="expired" action="#{admin.getUser()}" update="tabla"/>
             <p:dataTable id="tabla" var="lis" value="#{admin.users}" stickyHeader="true" >
                 <f:facet name="header">Usuarios Registrados</f:facet>
-                <p:column headerText="Username">
+                <p:column >
                     <p:outputLabel value="#{lis.username}"/>
                 </p:column>
-                <p:column headerText="UserType">
+                <p:column >
                     <p:outputLabel value="#{lis.user_type}"/>
                 </p:column>
-                <p:column headerText="Nombre">
+                <p:column >
                     <p:outputLabel value="#{lis.name}"/>
                 </p:column>
-                <p:column headerText="Apellidos">
+                <p:column >
                     <p:outputLabel value="#{lis.lastname}"/>
                 </p:column>
-                <p:column headerText="Sexo">
+                <p:column >
                     <p:outputLabel value="#{lis.sex}"/>
                 </p:column>
-                <p:column headerText="Teléfono">
+                <p:column >
                     <p:outputLabel value="#{lis.phone}"/>
                 </p:column>
-                <p:column headerText="Fecha de nacimiento">
+                <p:column >
                     <p:outputLabel value="#{lis.born}"/>
                 </p:column>
             </p:dataTable>

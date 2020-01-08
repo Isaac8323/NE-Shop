@@ -12,11 +12,9 @@
     </script>
     <h:body style="background-color: #DDDDDD" onload="expired()">
         <h:form>
-            <p:remoteCommand name="expired" action="#{user.Expired()}"/>
+            <p:remoteCommand name="expired" action="#{user.validateAdmin()}"/>
         </h:form>
         <p:growl id="infos" sticky="true" showDetail="true"/>
-
-
         <h:form>
             <p:layout fullPage="true">
                 <p:layoutUnit position="north" size="60">
@@ -33,7 +31,6 @@
                     </h:form>
                 </p:layoutUnit>
                 <p:layoutUnit position="south" size="0">
-
                 </p:layoutUnit>
                 <p:layoutUnit position="west" size="210">
                     <p:menu style="width: 180px;">
@@ -42,13 +39,12 @@
                             <p:menuitem value="Actualizar datos"/>
                         </p:submenu>
                         <p:submenu label="Productos">
-                            <p:menuitem value="Añadir productos" outcome="product.xhtml"/>
-                            <p:menuitem value="Actualizar datos"/>
+                            <p:menuitem value="Añadir productos" action="#{product.eraseFields()}"/>
+                            <p:menuitem value="Actualizar datos" outcome="updateProduct.xhtml"/>
                         </p:submenu>
                     </p:menu>
                 </p:layoutUnit>
                 <p:layoutUnit position="east" size="0">
-
                 </p:layoutUnit>
                 <p:layoutUnit position="center">
                     <p:tabMenu activeIndex="0">
@@ -56,7 +52,6 @@
                         <p:menuitem value="Usuarios" action="#{admin.reDirect('viewUsers.xhtml')}" icon="ui-icon-star" update="frame"/>
                         <p:menuitem value="Compras"  icon="ui-icon-wrench"/>
                     </p:tabMenu>
-
                     <p:panel id="frame">
                         <h:form>
                             <div id="wrap"> 
@@ -66,12 +61,9 @@
                             </div>
                         </h:form>
                     </p:panel>                        
-
                 </p:layoutUnit>
             </p:layout>
-
         </h:form>
-
         <h:form style="width:1500px;height:80px;background-color: #989898;position: relative; top: 800px;">
             <p:commandLink value=">Sitio web de NE" style="font-size:16px;display: block; width:100%; text-align:right;position: absolute; right: 250px; top: 15px;color:white;" />            
         </h:form>                    

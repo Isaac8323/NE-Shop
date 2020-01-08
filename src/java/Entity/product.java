@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name = "product")
 @NamedQueries({
     @NamedQuery(name="product.findAll", query = "SELECT p FROM product p"),
-    @NamedQuery(name = "product.Control", query = "SELECT p FROM product p WHERE p.name_product = :nameproduct")
+    @NamedQuery(name = "product.Control", query = "SELECT p FROM product p WHERE p.Id_product = :id")
 })
 public class product {
     @Id

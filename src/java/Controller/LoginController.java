@@ -51,6 +51,9 @@ public class LoginController implements Serializable {
             if (String.valueOf(hs.getAttribute("type_user")).equals("A")) {
                 page = "admin.xhtml?faces-redirect=true";
             }
+            if (String.valueOf(hs.getAttribute("type_user")).equals("G")) {
+                page = "guest.xhtml?faces-redirect=true";
+            }
         }
         return page;
     }

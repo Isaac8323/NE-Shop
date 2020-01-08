@@ -3,13 +3,9 @@ package Query;
 import Entity.card;
 import Entity.product;
 import Entity.user;
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import org.apache.commons.io.IOUtils;
 
 public class DataQuery {
 
