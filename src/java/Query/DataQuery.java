@@ -1,10 +1,14 @@
 package Query;
 
 import Entity.card;
+import Entity.product;
 import Entity.user;
+import java.io.File;
+import java.io.FileInputStream;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import org.apache.commons.io.IOUtils;
 
 public class DataQuery {
 
@@ -41,15 +45,15 @@ public class DataQuery {
         }
     }
     
-    public void passControl(String username, String password){
+    public void passControl(String username, String password) {
         user u = em.find(user.class, username);
         u.setUsername(username);
         u.setPassword(password);
         em.merge(u);
         em.getTransaction().commit();
     }
-    
-    public String getName(String username, String phone){
+
+    public String getName(String username, String phone) {
         try {
             user u = em.createNamedQuery("user.phone", user.class).setParameter("username", username).setParameter("phone", phone).getSingleResult();
             if (u != null) {
@@ -60,7 +64,7 @@ public class DataQuery {
             return "";
         }
     }
-    
+
     public char getUserType(String user, String pass) {
         char nombre;
         try {
@@ -82,6 +86,18 @@ public class DataQuery {
         } catch (Exception e) {
             return false;
         }
+    }
+    
+    public void RegisterProduct(String name_product, int stock, int category, double price, String description, String image){
+        product p = new product();
+        p.setName_product(name_product);
+        p.setStock(stock);
+        p.setCategory(category);
+        p.setPrice(price);
+        p.setDescription(description);
+        p.setImage(image);
+        em.persist(p);
+        em.getTransaction().commit();
     }
 
     public void RegisterUser(String name, String lastname, String username, String password, char sex, String phone, String born, int credit_card, int cvc) {

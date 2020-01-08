@@ -3,6 +3,7 @@ package Entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
@@ -21,9 +22,8 @@ public class product {
     private double price;
     @Column(name="description")
     private String description;
-    @Column(name="image")
+    @Column(name="image")    
     private String image;
-
     public product(){
         
     }
@@ -93,5 +93,5 @@ public class product {
     public void setImage(String image) {
         this.image = image;
     }
-    
+
 }

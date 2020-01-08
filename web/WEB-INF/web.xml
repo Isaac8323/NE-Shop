@@ -4,39 +4,18 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
-    <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet>
-        <servlet-name>NewServlet</servlet-name>
-        <servlet-class>Servlet.NewServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Sesiones</servlet-name>
-        <servlet-class>Servlet.Sesiones</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Validator</servlet-name>
-        <servlet-class>Util.Validator</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.xhtml</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>NewServlet</servlet-name>
-        <url-pattern>/NewServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Sesiones</servlet-name>
-        <url-pattern>/Sesiones</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Validator</servlet-name>
-        <url-pattern>/Validator</url-pattern>
-    </servlet-mapping>
+    <filter>
+        <filter-name>Primefaces Upload Filter</filter-name>
+        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+        <init-param>
+            <param-name>thresholdSize</param-name>
+            <param-value>512000</param-value>
+        </init-param>
+        <init-param>
+            <param-name>uploadDirectory</param-name>
+            <param-value>D:\Users\isaqu\Documents\GitHub\neshop\HeavyIMG</param-value>
+        </init-param>
+    </filter>
     <session-config>
         <session-timeout>
             15

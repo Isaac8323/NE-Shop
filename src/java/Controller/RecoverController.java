@@ -32,8 +32,7 @@ public class RecoverController {
         }
     }
 
-    public String changePass() {
-        String page = "";
+    public void changePass() {
         RequestContext.getCurrentInstance().update("growls");
         RequestContext  req = RequestContext.getCurrentInstance();
         FacesContext context = FacesContext.getCurrentInstance();
@@ -47,7 +46,6 @@ public class RecoverController {
                 context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Advertencia", "Las contraseñas no coinciden"));
             }
         }
-        return page;
     }
 
     public String eraseField() {
