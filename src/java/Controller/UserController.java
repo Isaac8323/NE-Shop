@@ -30,6 +30,7 @@ public class UserController {
             return "login.xhtml?faces-redirect=true";
         }
         return "";
+        //Hello moto
     }
 
     public String validateAdmin() {
