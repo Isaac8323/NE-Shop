@@ -11,7 +11,8 @@ import javax.persistence.Table;
 @Table(name = "card")
 @NamedQueries({
     @NamedQuery(name="card.findAll", query = "SELECT c FROM card c"),
-    @NamedQuery(name = "card.Control", query = "SELECT c FROM card c WHERE c.cvc = :cvc")
+    @NamedQuery(name = "card.Control", query = "SELECT c FROM card c WHERE c.cvc = :cvc"),
+    @NamedQuery(name = "card.sum", query = "SELECT c FROM card c WHERE c.card_number = :cn and c.cvc = :cvc")
 })
 public class card {
     @Id

@@ -86,6 +86,20 @@ public class DataQuery {
         }
     }
 
+    public boolean Suma(int cn,  double in) {
+        try {
+            card ca =  em.find(card.class, cn);
+            double bef = ca.getBalance();
+            double aft = bef + in;
+            ca.setBalance(aft);
+            em.merge(ca);
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public List typeU() {
         try {
             List<user> users = em.createNamedQuery("user.type", user.class).setParameter("type", 'U').getResultList();
@@ -95,22 +109,22 @@ public class DataQuery {
         }
     }
 
-    public List listProducts(){
-        try{
+    public List listProducts() {
+        try {
             List<product> products = em.createNamedQuery("product.findAll", product.class).getResultList();
             return products;
-        }catch(Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
-    
-    public void deleteProduct(int id){
+
+    public void deleteProduct(int id) {
         product p = em.find(product.class, id);
         em.remove(p);
         em.getTransaction().commit();
     }
-    
-    public boolean deleteUser(String username){        
+
+    public boolean deleteUser(String username) {
         try {
             user u = em.find(user.class, username);
             int credit = u.getCredit_card();
@@ -123,7 +137,7 @@ public class DataQuery {
             return false;
         }
     }
-    
+
     public void RegisterProduct(String name_product, int stock, int category, double price, String description, String image) {
         product p = new product();
         p.setName_product(name_product);
