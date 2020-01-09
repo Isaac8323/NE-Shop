@@ -97,6 +97,18 @@ public class DataQuery {
         em.persist(p);
         em.getTransaction().commit();
     }
+    
+    public void updateProduct(int id, String name, int stock, int category, double price, String description, String img){
+        product p = em.find(product.class, id);
+        p.setName_product(name);
+        p.setStock(stock);
+        p.setCategory(category);
+        p.setPrice(price);
+        p.setDescription(description);
+        p.setImage(img);
+        em.merge(p);
+        em.getTransaction().commit();
+    }
 
     public void RegisterUser(String name, String lastname, String username, String password, char sex, String phone, String born, int credit_card, int cvc) {
         user u = new user();

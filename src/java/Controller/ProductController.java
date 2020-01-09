@@ -46,8 +46,8 @@ public class ProductController {
     public void getList() {
         FacesContext context = FacesContext.getCurrentInstance();
         RequestContext.getCurrentInstance().update("growlpro");
-        try {            
-            products = em.createNamedQuery("product.findAll", product.class).getResultList();       
+        try {
+            products = em.createNamedQuery("product.findAll", product.class).getResultList();
         } catch (Exception e) {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exception", e.getMessage()));
         }
@@ -103,25 +103,17 @@ public class ProductController {
         }
     }
 
-    public void updateProduct() {
+    public void doUpdate() {
         RequestContext.getCurrentInstance().update("growlpro");
+        RequestContext req = RequestContext.getCurrentInstance();
         FacesContext context = FacesContext.getCurrentInstance();
-        RequestContext req = RequestContext.getCurrentInstance();        
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
-        try {
-            product p = em.find(product.class, "Nintendo Entertainment Systemasdfas");            
-            p.setName_product(name);
-            p.setDescription(desc);
-            p.setCategory(id_category);
-            p.setImage(render);
-            p.setPrice(price);
-            p.setStock(cant);            
-            em.merge(p);
-            tx.commit();
+        if (!(name.equals("")) && !(desc.equals("")) && !(render.equals("")) && price > 0 && cant >= 0) {
+            query.updateProduct(id_prod, name, cant, id_category, price, desc, render);
             req.execute("PF('wdialogs').show();");
-        } catch (Exception e) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exception", e.getMessage()));
+        } else {
+            if (name.equals("") || desc.equals("") || render.equals("") || price < 0 || cant < 0) {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Advertencia", "Favor de ingresar los campos correctamente"));
+            }
         }
     }
 
