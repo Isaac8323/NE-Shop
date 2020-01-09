@@ -34,13 +34,10 @@
                 </p:layoutUnit>
                 <p:layoutUnit position="west" size="210">
                     <p:menu style="width: 180px;">
-                        <p:submenu label="Directivos">
-                            <p:menuitem value="Añadir administrador"/>
-                            <p:menuitem value="Actualizar datos"/>
-                        </p:submenu>
                         <p:submenu label="Productos">
                             <p:menuitem value="Añadir productos" action="#{product.eraseFields()}"/>
                             <p:menuitem value="Actualizar datos" outcome="updateProduct.xhtml"/>
+                            <p:menuitem value="Eliminar productos" outcome="deleteProduct.xhtml"/>
                         </p:submenu>
                     </p:menu>
                 </p:layoutUnit>

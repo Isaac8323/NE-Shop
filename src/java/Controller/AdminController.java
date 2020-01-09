@@ -2,6 +2,7 @@ package Controller;
 
 import Entity.product;
 import Entity.user;
+import Query.DataQuery;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -19,6 +20,7 @@ public class AdminController {
     private List<product> products;
     EntityManager em;
     EntityManagerFactory emf;
+    private DataQuery query = new DataQuery();
 
     private void doConnection(){
         emf = Persistence.createEntityManagerFactory("neshopPU");
@@ -27,8 +29,7 @@ public class AdminController {
     }
     
     public void getUser() {
-        doConnection();
-        users = em.createNamedQuery("user.findAll", user.class).getResultList();
+        users = query.typeU();
     }
     
     public void getProduct(){

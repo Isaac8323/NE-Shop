@@ -49,7 +49,20 @@ public class RegisterController implements Serializable {
         return "user.xhtml?faces-redirect=true";
     }
 
+    public void eraseFields() {
+        username = "";
+        password = "";
+        name = "";
+        lastname = "";
+        sex = 'S';
+        phone = "";
+        credit_card = 0;
+        cvc = 0;
+        f_seleccionada = "";
+    }
+
     public void RegisterController() {
+        RequestContext req = RequestContext.getCurrentInstance();
         RequestContext.getCurrentInstance().update("growl");
         FacesContext context = FacesContext.getCurrentInstance();
         char c = radio.charAt(0);
@@ -58,7 +71,6 @@ public class RegisterController implements Serializable {
         if (query.searchCVC(cvc)) {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error", "Esta tarjeta ya existe"));
         } else {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", username));
             if (phone.contains("1") || phone.contains("2") || phone.contains("3") || phone.contains("4") || phone.contains("5") || phone.contains("6") || phone.contains("7") || phone.contains("8") || phone.contains("9") || phone.contains("0")) {
                 numero = true;
             }
@@ -66,7 +78,7 @@ public class RegisterController implements Serializable {
                 DataQuery q = new DataQuery();
                 q.RegisterUser(name, lastname, username, password, sex, phone, f_seleccionada, credit_card, cvc);
                 if (query.loginControl(username, password)) {
-                    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro", "Se registró con éxito"));
+                    req.execute("PF('wdialogi').show();");
                 }
             } else {
                 context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro", "Fallo en el registro"));

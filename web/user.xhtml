@@ -11,9 +11,7 @@
         expired();
     </script>
     <h:body style="background-color: #DDDDDD" onload="expired()">
-        <h:form>
-            <p:remoteCommand name="expired" action="#{user.validateUser()}"/>
-        </h:form>
+
         <p:growl id="info" sticky="true" showDetail="true"/>
         <h:form style="width:1500px;height:80px;background-color: #F1F1F1;">
             Bienvenido #{login.username} !
@@ -25,9 +23,36 @@
                 <p:commandButton value="cerrar sesión" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
                 <p:commandButton value="cancelar" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
             </p:confirmDialog>
-        </h:form>   
-        
-        <h:form style="width:1500px;height:80px;background-color: #989898;position: relative; top: 800px;">
+        </h:form>
+        <h:form>
+            <p:menubar>
+                <p:submenu label="Mis compras">
+                    <p:menuitem value="Ver historial" url="http://www.google.com" />                    
+                </p:submenu>
+                <p:submenu label="Perfil">
+                    <p:menuitem value="Editar mis datos" url="http://www.youtube.com" />
+                    <p:menuitem value="Darse de baja" url="http://www.break.com" />
+                </p:submenu>
+                <p:submenu label="Tarjeta">
+                    <p:menuitem value="Añadir recursos" url="http://www.youtube.com" />
+                </p:submenu>
+            </p:menubar>
+        </h:form>
+        <h:form style="position: relative; left: 130px;">
+            <p:remoteCommand partialSubmit="true" process="@this" name="expired" action="#{product.getListUser()}" update="carou"/>
+            <p:panelGrid columns="1" id="carou">
+                <p:carousel autoPlayInterval="30000" value="#{product.usuarios}" var="car" itemStyle="width:400px;height:650px" >
+                    <p:panelGrid columns="1" id="cont">
+                        <p:graphicImage value="#{car.image}" style="display:block;margin-left:auto;margin-right:auto;" width="250" height="220"/>
+                        <h:outputText value="#{car.name_product}" />
+                        <h:outputText value="Precio: $#{car.price}" />
+                        <h:outputText value="#{car.description}" />
+                        <p:commandButton value="Comprar"/>
+                    </p:panelGrid>
+                </p:carousel>
+            </p:panelGrid>                        
+        </h:form>
+        <h:form style="width:1500px;height:80px;background-color: #989898;position: relative; top: 50px;">
             <p:commandLink value=">Sitio web de NE" style="font-size:16px;display: block; width:100%; text-align:right;position: absolute; right: 250px; top: 15px;color:white;" />            
         </h:form>                    
 

@@ -7,8 +7,17 @@
     <h:head>
         <title>Registro</title>
     </h:head>
-    <h:body style="background-color: #DDDDDD">                 
-        <p:growl id="growl" sticky="true" showDetail="true"/>        
+    <script>
+        expired();
+    </script>
+    <h:body style="background-color: #DDDDDD" onload="expired()">                 
+        <p:growl id="growl" sticky="true" showDetail="true"/>
+        <p:dialog id="dialogi" widgetVar="wdialogi" header="Product" draggable="false" closable="false" resizable="false" modal="true" appendTo="@(body)">
+            <h:form>
+                <p:outputLabel value="El usuario se ha registrado correctamente     "/>
+                <p:commandButton value="Aceptar" icon="ui-icon-check" action="#{register.toLogin()}"/>                
+            </h:form>
+        </p:dialog>
         <h:form style="width:1500px;height:80px;background-color: #F1F1F1;">
             <p:commandLink value="Cuenta de NE" action="#{register.toLogin()}" style="font-family:Book Antiqua;font-size:18px;display: block; width:100%; text-align:center;position: absolute;top: 35px;color:black;" />            
         </h:form>
@@ -22,11 +31,12 @@
         <p:layout style="width:800px;height:600px; position: absolute; top: 200px; left: 390px;">
             <p:layoutUnit  position="center">                
                 <h:form style="position: absolute; left:80px; top:30px;">
-                    <h:panelGrid columns="2">
+                    <p:remoteCommand partialSubmit="true" process="@this" name="expired" action="#{register.eraseFields()}" update="userdata"/>
+                    <p:panelGrid columns="2" id="userdata">
                         <p:outputLabel style="display: block;text-align:right;" value="Nombre de usuario"/>
                         <p:inputText style="width:400px;" value="#{register.username}"/>
                         <p:outputLabel style="display: block;text-align:right;" value="Contraseña"/>
-                        <p:password style="width:300px;" feedback="true" value="#{register.password}"/>                        
+                        <p:password style="width:300px;" feedback="true" value="#{register.password}"/>
                         <p:outputLabel style="display: block;text-align:right;" value="Nombres"/>
                         <p:inputText style="width:450px;" value="#{register.name}"/>
                         <p:outputLabel style="display: block;text-align:right;" value="Apellidos"/>
@@ -81,8 +91,8 @@
                                 allDayText: 'Todo el día'
                             };
                         </script>
-                    </h:panelGrid>
-                    <p:commandButton style="position: absolute; top: 330px; left: 260px;" value="Crear cuenta" action="#{register.RegisterController()}"/>
+                    </p:panelGrid>
+                    <p:commandButton style="position: absolute; top: 450px; left: 260px;" value="Crear cuenta" action="#{register.RegisterController()}"/>
                 </h:form>
             </p:layoutUnit>
         </p:layout>

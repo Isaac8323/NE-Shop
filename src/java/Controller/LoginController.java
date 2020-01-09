@@ -38,8 +38,15 @@ public class LoginController implements Serializable {
         return "";
     }
 
+    public String isGuest() {
+        HttpSession hs = SessionControl.getSession();
+        hs.setAttribute("username", "Invitado");
+        hs.setAttribute("type_user", 'G');
+        return "guest.xhtml?faces-redirect=true";
+    }
+
     public String Logged() {
-        String page="";
+        String page = "";
         HttpSession hs = SessionControl.getSession();
         RequestContext.getCurrentInstance().update("info");
         if (hs.getAttribute("username") == null) {
@@ -75,11 +82,10 @@ public class LoginController implements Serializable {
         this.user_type = user_type;
     }
 
-
-    public String toRecover(){
+    public String toRecover() {
         return "recover.xhtml?faces-redirect=true";
     }
-    
+
     public String toGuest() {
         return "guest.xhtml?faces-redirect=true";
     }

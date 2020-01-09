@@ -15,6 +15,12 @@ import org.primefaces.context.RequestContext;
 @ManagedBean(name = "user")
 @SessionScoped
 public class UserController {
+    
+    private String name;
+    private String lastname;
+    private char sex;
+    private String phone;
+    private String born;
 
     public String Expired() throws IOException {
         HttpSession hs = SessionControl.getSession();
@@ -70,4 +76,45 @@ public class UserController {
         }
         return "";
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public char getSex() {
+        return sex;
+    }
+
+    public void setSex(char sex) {
+        this.sex = sex;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getBorn() {
+        return born;
+    }
+
+    public void setBorn(String born) {
+        this.born = born;
+    }
+    
 }

@@ -2,6 +2,7 @@ package Controller;
 
 import Entity.product;
 import Query.DataQuery;
+import Util.SessionControl;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +17,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import org.primefaces.context.RequestContext;
 
@@ -35,6 +37,8 @@ public class ProductController {
     EntityManager em;
     EntityManagerFactory emf;
     List<product> products;
+    List<product> guest;
+    List<product> usuarios;
     private int aux;
 
     public ProductController() {
@@ -43,13 +47,72 @@ public class ProductController {
         em.getTransaction().begin();
     }
 
-    public void getList() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        RequestContext.getCurrentInstance().update("growlpro");
-        try {
-            products = em.createNamedQuery("product.findAll", product.class).getResultList();
-        } catch (Exception e) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exception", e.getMessage()));
+    public String getList() {
+        HttpSession hs = SessionControl.getSession();
+        RequestContext.getCurrentInstance().update("info");
+        if (hs.getAttribute("username") == null) {
+            return "login.xhtml?faces-redirect=true";
+        } else {
+            char user = (char) hs.getAttribute("type_user");
+            if (user == 'A') {
+                FacesContext context = FacesContext.getCurrentInstance();
+                RequestContext.getCurrentInstance().update("growlpro");
+                try {
+                    products = em.createNamedQuery("product.findAll", product.class).getResultList();
+                } catch (Exception e) {
+                    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exception", e.getMessage()));
+                }
+            } else {
+                return "login.xhtml?faces-redirect=true";
+            }
+            return "";
+        }
+    }
+    
+
+    public String getListGuest() {
+        HttpSession hs = SessionControl.getSession();
+        RequestContext.getCurrentInstance().update("info");
+        if (hs.getAttribute("username") == null) {
+            return "login.xhtml?faces-redirect=true";
+        } else {
+            char user = (char) hs.getAttribute("type_user");
+            if (user == 'G') {
+                RequestContext.getCurrentInstance().update("growlguest");
+                FacesContext context = FacesContext.getCurrentInstance();   
+                try {
+                    DataQuery hue = new DataQuery();
+                    guest = hue.listProducts();
+                } catch (Exception e) {
+                    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exception", e.getMessage()));
+                }
+            } else {
+                return "login.xhtml?faces-redirect=true";
+            }
+            return "";
+        }
+    }
+    
+    public String getListUser(){
+        HttpSession hs = SessionControl.getSession();
+        RequestContext.getCurrentInstance().update("info");
+        if (hs.getAttribute("username") == null) {
+            return "login.xhtml?faces-redirect=true";
+        } else {
+            char user = (char) hs.getAttribute("type_user");
+            if (user == 'U') {
+                RequestContext.getCurrentInstance().update("growlguest");
+                FacesContext context = FacesContext.getCurrentInstance();   
+                try {
+                    DataQuery hue = new DataQuery();
+                    usuarios = hue.listProducts();
+                } catch (Exception e) {
+                    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exception", e.getMessage()));
+                }
+            } else {
+                return "login.xhtml?faces-redirect=true";
+            }
+            return "";
         }
     }
 
@@ -57,7 +120,7 @@ public class ProductController {
         try (InputStream input = file.getInputStream()) {
             String namei = file.getSubmittedFileName();
             Files.copy(input, new File("D:\\Users\\isaqu\\Documents\\GitHub\\neshop\\web\\resources\\img\\", namei).toPath());
-            render = "/resources/img/" + name;
+            render = "/resources/img/" + namei;
         } catch (IOException e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
@@ -68,7 +131,8 @@ public class ProductController {
         RequestContext.getCurrentInstance().update("growlpro");
         FacesContext context = FacesContext.getCurrentInstance();
         if (!(name.equals("")) && !(desc.equals("")) && cant != 0 && price != 0) {
-            query.RegisterProduct(name, cant, id_category, price, desc, render);
+            DataQuery ql = new DataQuery();
+            ql.RegisterProduct(name, cant, id_category, price, desc, render);
             req.execute("PF('wdialogs').show();");
         } else {
             if (name.equals("")) {
@@ -103,12 +167,28 @@ public class ProductController {
         }
     }
 
+    public void doDelete() {
+        RequestContext.getCurrentInstance().update("growlpro");
+        RequestContext req = RequestContext.getCurrentInstance();
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "info", String.valueOf(aux)));
+        try {
+            DataQuery queu = new DataQuery();
+            queu.deleteProduct(aux);
+            req.execute("PF('wdialogss1').show();");
+        } catch (Exception e) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage()));
+        }
+    }
+
     public void doUpdate() {
         RequestContext.getCurrentInstance().update("growlpro");
         RequestContext req = RequestContext.getCurrentInstance();
         FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Advertencia", String.valueOf(aux)));
         if (!(name.equals("")) && !(desc.equals("")) && !(render.equals("")) && price > 0 && cant >= 0) {
-            query.updateProduct(id_prod, name, cant, id_category, price, desc, render);
+            DataQuery queue = new DataQuery();
+            queue.updateProduct(id_prod, name, cant, id_category, price, desc, render);
             req.execute("PF('wdialogs').show();");
         } else {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Advertencia", "Favor de ingresar los campos correctamente"));
@@ -124,6 +204,22 @@ public class ProductController {
         id_category = 0;
         render = "";
         return "product.xhtml?faces-redirect=true";
+    }
+
+    public List<product> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<product> usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public List<product> getGuest() {
+        return guest;
+    }
+
+    public void setGuest(List<product> guest) {
+        this.guest = guest;
     }
 
     public int getAux() {

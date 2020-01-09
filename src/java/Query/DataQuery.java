@@ -3,6 +3,7 @@ package Query;
 import Entity.card;
 import Entity.product;
 import Entity.user;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -41,7 +42,7 @@ public class DataQuery {
             return false;
         }
     }
-    
+
     public void passControl(String username, String password) {
         user u = em.find(user.class, username);
         u.setUsername(username);
@@ -85,8 +86,31 @@ public class DataQuery {
         }
     }
 
+    public List typeU() {
+        try {
+            List<user> users = em.createNamedQuery("user.type", user.class).setParameter("type", 'U').getResultList();
+            return users;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public List listProducts(){
+        try{
+            List<product> products = em.createNamedQuery("product.findAll", product.class).getResultList();
+            return products;
+        }catch(Exception e){
+            return null;
+        }
+    }
     
-    public void RegisterProduct(String name_product, int stock, int category, double price, String description, String image){
+    public void deleteProduct(int id){
+        product p = em.find(product.class, id);
+        em.remove(p);
+        em.getTransaction().commit();
+    }
+    
+    public void RegisterProduct(String name_product, int stock, int category, double price, String description, String image) {
         product p = new product();
         p.setName_product(name_product);
         p.setStock(stock);
@@ -97,8 +121,8 @@ public class DataQuery {
         em.persist(p);
         em.getTransaction().commit();
     }
-    
-    public void updateProduct(int id, String name, int stock, int category, double price, String description, String img){
+
+    public void updateProduct(int id, String name, int stock, int category, double price, String description, String img) {
         product p = em.find(product.class, id);
         p.setName_product(name);
         p.setStock(stock);

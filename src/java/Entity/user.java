@@ -10,11 +10,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "user")
 @NamedQueries({
-    @NamedQuery(name="user.findAll", query = "SELECT u FROM user u"),
+    @NamedQuery(name = "user.findAll", query = "SELECT u FROM user u"),
     @NamedQuery(name = "user.Control", query = "SELECT u FROM user u WHERE u.username = :username and u.password = :password"),
-    @NamedQuery(name = "user.phone", query = "SELECT u FROM user u WHERE u.username = :username and u.phone = :phone")
+    @NamedQuery(name = "user.phone", query = "SELECT u FROM user u WHERE u.username = :username and u.phone = :phone"),
+    @NamedQuery(name = "user.type", query = "SELECT u FROM user u WHERE u.user_type = :type")
 })
 public class user {
+
     @Id
     @Column(name = "username")
     private String username;
@@ -36,7 +38,7 @@ public class user {
     private int credit_card;
 
     public user() {
-
+        
     }
 
     public user(String username, String password, String name, String lastname, char sex, String phone, String born, char user_type, int credit_card) {
@@ -122,6 +124,5 @@ public class user {
     public void setUser_type(char user_type) {
         this.user_type = user_type;
     }
-
 
 }
