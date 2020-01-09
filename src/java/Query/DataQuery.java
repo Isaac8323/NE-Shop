@@ -110,6 +110,20 @@ public class DataQuery {
         em.getTransaction().commit();
     }
     
+    public boolean deleteUser(String username){        
+        try {
+            user u = em.find(user.class, username);
+            int credit = u.getCredit_card();
+            card c = em.find(card.class, credit);
+            em.remove(u);
+            em.remove(c);
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
     public void RegisterProduct(String name_product, int stock, int category, double price, String description, String image) {
         product p = new product();
         p.setName_product(name_product);

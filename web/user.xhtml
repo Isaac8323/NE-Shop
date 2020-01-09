@@ -11,16 +11,24 @@
         expired();
     </script>
     <h:body style="background-color: #DDDDDD" onload="expired()">
-
-        <p:growl id="info" sticky="true" showDetail="true"/>
+        <p:dialog id="dialoguser" widgetVar="dialoguser" header="Product" draggable="false" closable="false" resizable="false" modal="true" appendTo="@(body)">
+            <h:form>
+                <p:outputLabel value="Se ha dado de baja     "/>
+                <p:commandButton value="Aceptar" icon="ui-icon-check" action="#{user.toLogin()}"/>
+            </h:form>
+        </p:dialog>
+        <p:growl id="infouser" sticky="true" showDetail="true"/>
         <h:form style="width:1500px;height:80px;background-color: #F1F1F1;">
             Bienvenido #{login.username} !
             <h:outputText value="NE Website" style="font-family:Book Antiqua;font-size:18px;display: block; width:100%; text-align:center;position: absolute;top: 35px;color:black;" />
+            <p:commandButton style="display: block; position:absolute; left:1125px;" value="Darse de baja" action="#{user.doDelete()}">
+                <p:confirm header="Confirmación" message="¿Estás seguro de que deseas darte de baja?" icon="ui-icon-alert"/>
+            </p:commandButton>
             <p:commandButton style="display: block; position:absolute; left:1325px;" value="Cerrar sesión" action="#{login.logOut()}">
                 <p:confirm header="Confirmación" message="¿Estás seguro de que deseas cerrar sesión?" icon="ui-icon-alert"/>
             </p:commandButton>
             <p:confirmDialog global="true" showEffect="fade">
-                <p:commandButton value="cerrar sesión" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                <p:commandButton value="aceptar" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
                 <p:commandButton value="cancelar" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
             </p:confirmDialog>
         </h:form>
@@ -28,10 +36,6 @@
             <p:menubar>
                 <p:submenu label="Mis compras">
                     <p:menuitem value="Ver historial" url="http://www.google.com" />                    
-                </p:submenu>
-                <p:submenu label="Perfil">
-                    <p:menuitem value="Editar mis datos" url="http://www.youtube.com" />
-                    <p:menuitem value="Darse de baja" url="http://www.break.com" />
                 </p:submenu>
                 <p:submenu label="Tarjeta">
                     <p:menuitem value="Añadir recursos" url="http://www.youtube.com" />

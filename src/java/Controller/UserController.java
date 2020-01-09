@@ -5,10 +5,13 @@
  */
 package Controller;
 
+import Query.DataQuery;
 import Util.SessionControl;
 import java.io.IOException;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import org.primefaces.context.RequestContext;
 
@@ -31,6 +34,22 @@ public class UserController {
         }
         return "";
         //Hello moto
+    }
+    
+    public void doDelete(){
+        HttpSession hs = SessionControl.getSession();
+        RequestContext.getCurrentInstance().update("infouser");
+        FacesContext context = FacesContext.getCurrentInstance();
+        RequestContext req = RequestContext.getCurrentInstance();
+        DataQuery h = new DataQuery();
+        String un = (String) hs.getAttribute("username");
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Advertencia", un));
+        if(h.deleteUser(un)){
+            req.execute("PF('dialoguser').show();");
+            hs.invalidate();
+        }else{
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Advertencia", "No se ha podido dar de baja al usuario"));
+        }
     }
 
     public String validateAdmin() {
@@ -76,6 +95,10 @@ public class UserController {
             }
         }
         return "";
+    }
+    
+    public String toLogin(){
+        return "login.xhtml?faces-redirect=true";
     }
 
     public String getName() {
