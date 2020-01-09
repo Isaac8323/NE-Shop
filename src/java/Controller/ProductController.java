@@ -111,9 +111,7 @@ public class ProductController {
             query.updateProduct(id_prod, name, cant, id_category, price, desc, render);
             req.execute("PF('wdialogs').show();");
         } else {
-            if (name.equals("") || desc.equals("") || render.equals("") || price < 0 || cant < 0) {
-                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Advertencia", "Favor de ingresar los campos correctamente"));
-            }
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Advertencia", "Favor de ingresar los campos correctamente"));
         }
     }
 
