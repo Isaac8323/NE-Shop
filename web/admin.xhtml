@@ -47,7 +47,7 @@
                     <p:tabMenu activeIndex="0">
                         <p:menuitem value="Productos" action="#{admin.reDirect('viewProducts.xhtml')}" icon="ui-icon-star" update="frame"/>
                         <p:menuitem value="Usuarios" action="#{admin.reDirect('viewUsers.xhtml')}" icon="ui-icon-star" update="frame"/>
-                        <p:menuitem value="Compras"  icon="ui-icon-wrench"/>
+                        <p:menuitem value="Compras" action="#{admin.reDirect('viewReport.xhtml')}"  icon="ui-icon-wrench" update="frame"/>
                     </p:tabMenu>
                     <p:panel id="frame">
                         <h:form>

@@ -34,9 +34,6 @@
         </h:form>
         <h:form>
             <p:menubar>
-                <p:submenu label="Mis compras">
-                    <p:menuitem value="Ver historial" url="http://www.google.com" />                    
-                </p:submenu>
                 <p:submenu label="Tarjeta">
                     <p:menuitem value="Añadir recursos" url="card.xhtml" />
                 </p:submenu>
@@ -51,10 +48,14 @@
                         <h:outputText value="#{car.name_product}" />
                         <h:outputText value="Precio: $#{car.price}" />
                         <h:outputText value="#{car.description}" />
-                        <p:commandButton value="Comprar"/>
                     </p:panelGrid>
                 </p:carousel>
-            </p:panelGrid>                        
+                <p:selectOneMenu value="#{user.aux}" filter="true" filterMatchMode="contains">
+                    <f:selectItems value="#{product.usuarios}" var="sel" itemLabel="#{sel.name_product}" itemValue="#{sel.id_product}"/>
+                </p:selectOneMenu>
+                <h:commandButton value="aceptar" action="#{user.Purchase()}"/>
+            </p:panelGrid>
+            
         </h:form>
         <h:form style="width:1500px;height:80px;background-color: #989898;position: relative; top: 50px;">
             <p:commandLink value=">Sitio web de NE" style="font-size:16px;display: block; width:100%; text-align:right;position: absolute; right: 250px; top: 15px;color:white;" />            

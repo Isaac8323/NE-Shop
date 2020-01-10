@@ -6,10 +6,13 @@
 package Controller;
 
 import Entity.card;
+import Entity.product;
+import Entity.purchase;
 import Entity.user;
 import Query.DataQuery;
 import Util.SessionControl;
 import java.io.IOException;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -31,6 +34,8 @@ public class UserController {
     EntityManager em;
     EntityManagerFactory emf;
     private double ingreso;
+    private int aux;
+    List<purchase> pur;
 
     public UserController() {
         emf = Persistence.createEntityManagerFactory("neshopPU");
@@ -78,6 +83,10 @@ public class UserController {
         }
     }
 
+    public void getPurchase(){
+        pur = em.createNamedQuery("purchase.findAll", purchase.class).getResultList();
+    }
+    
     public void doDelete() {
         HttpSession hs = SessionControl.getSession();
         RequestContext.getCurrentInstance().update("infouser");
@@ -95,7 +104,7 @@ public class UserController {
     }
     
     public String Sum(){
-        RequestContext.getCurrentInstance().update("infouser");
+        RequestContext.getCurrentInstance().update("growlca");
         FacesContext context = FacesContext.getCurrentInstance();
         RequestContext req = RequestContext.getCurrentInstance();
         DataQuery h1 = new DataQuery();
@@ -105,6 +114,22 @@ public class UserController {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Advertencia", "No se pudieron añadir los fondos"));
         }
         return "";
+    }
+    
+    public void Purchase(){
+        HttpSession hs = SessionControl.getSession();
+        RequestContext.getCurrentInstance().update("dialoguser");
+        FacesContext context = FacesContext.getCurrentInstance();
+        RequestContext req = RequestContext.getCurrentInstance();
+        String un = (String) hs.getAttribute("username");
+        user uu = em.find(user.class, un);
+        int com = uu.getCredit_card();
+        DataQuery h2 = new DataQuery();
+        if(h2.Compra(com, aux, String.valueOf(hs.getAttribute("username")))){
+            req.execute("PF('dialogsca').show();");
+        }else{
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Advertencia", "No se pudo realizar la compra"));
+        }
     }
 
     public String validateAdmin() {
@@ -150,6 +175,22 @@ public class UserController {
             }
         }
         return "";
+    }
+
+    public List<purchase> getPur() {
+        return pur;
+    }
+
+    public void setPur(List<purchase> pur) {
+        this.pur = pur;
+    }
+
+    public int getAux() {
+        return aux;
+    }
+
+    public void setAux(int aux) {
+        this.aux = aux;
     }
 
     public String toUser(){

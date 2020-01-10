@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <script>
+        expired();
+    </script>
+    <h:body onload="expired()">
+        <p:growl id="infoo" sticky="true" showDetail="true"/>
+        <h:form>
+            <p:remoteCommand partialSubmit="true" process="@this" name="expired" action="#{user.getPurchase()}" update="tabla"/>
+            <p:dataTable id="tabla" var="lis" value="#{user.pur}" stickyHeader="true" >
+                <f:facet name="header">Compras realizadas</f:facet>
+                <p:column>
+                    <p:outputLabel value="#{lis.id_purchase}"/>
+                </p:column>
+                <p:column>
+                    <p:outputLabel value="#{lis.total}"/>
+                </p:column>
+                <p:column>
+                    <p:outputLabel value="#{lis.user}"/>
+                </p:column>
+                <p:column>
+                    <p:outputLabel value="#{lis.product}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>                
+    </h:body>
+</html>
+
